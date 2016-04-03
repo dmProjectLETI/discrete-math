@@ -6,6 +6,7 @@ Faculty of Computer Technology and Informatics LETI. Spb 2016.
 
 Selected Language : C++
 IDE's : Visual Studio, Qt Creator
+Architects :
 
 Folder "VS-Version" contain all modules for work with natural(Modules\N),
 whole(Modules\Z) and rational(Modules\Q) numbers, also it's contain module for
