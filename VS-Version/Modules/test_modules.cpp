@@ -4,16 +4,10 @@
 #include <conio.h>
 
 using namespace std;
-
-
-struct Natural
-{
-	vector<unsigned int> A;
-};
-
-bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1, 
+// Модуль для натуральных
+bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1,
 {											// если первое больше или равно второму. 0 - если меньше.
-	if (First.A.size()<Second.A.size())
+	if (First.A.size() < Second.A.size())
 		return 0;
 	else
 	{
@@ -40,7 +34,6 @@ bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1
 			}
 		} while (k);
 	}
-
 }
 
 bool NZER_N_B(Natural chislo) //Проверяет число на не равенство нулю
@@ -79,7 +72,6 @@ Natural ADD_1N_N(Natural chislo) //Прибавляет 1 к числу
 			chislo.A[i] = ++chislo.A[i];
 			k = 0;
 		}
-
 	} while (k);
 	return chislo;
 }
@@ -109,7 +101,7 @@ Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Складывает два числа
 };
 
 Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа другое. Работает только
-{												//для неотрицательных результатов, поэтому перед вызовом этой функции 
+{												//для неотрицательных результатов, поэтому перед вызовом этой функции
 	int p = 0;									//необходимо убедиться, что первое число не меньше второго
 	for (int i = 0; i < Second.A.size(); ++i)
 	{
@@ -145,7 +137,6 @@ Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа друго
 			k = 1;
 		if (!First.A[i] && !k)
 			First.A.pop_back();
-
 	}
 	return First;
 }
@@ -189,7 +180,7 @@ Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Вычитает из первого
 	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//что результат возможен, т.е. неотрицателен
 }
 
-Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру частного, умноженную на 10^k, 
+Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру частного, умноженную на 10^k,
 {													//где k - позиция этой цифры в частном
 	Natural chislo;
 	int j = (chislo1.A.size() - 1);
@@ -252,3 +243,50 @@ Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Находит НОК двух чисел
 {
 	return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
 }
+
+// Конец модуля для натуральных
+
+// Модуль для целых
+
+// Конец модуля для целых
+
+// Модуль для дробей
+
+Ratio ADD_QQ_Q(Ratio A, Ratio B)
+{
+	Ratio C;
+	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	C.num = ADD_ZZ_Z(A.num, B.num);
+	C.denum = temp;
+	return C;
+}
+
+Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
+						  // Перед вызовом следует убедиться, что знаменатель равен единице
+{
+	return(b.num); // Госпожи, как же это сложно было
+}
+
+Ratio TRAN_Z_Q(Integer A)
+{
+	Ratio B; //дробь, которую возвращает функция
+	B.num = A; //число А в числитель
+	B.denum.a.push_back(1); //в знаменатель ставим 1
+	return B;
+}
+
+Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
+{
+	Natural B = GVF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
+	A.num.A = DIV_ZZ_Z(A.num.A, B); // Делим числитель на НОД
+	A.denum = DIV_ZZ_Z(A.denum, B); // Делим знаменатель на НОД
+	return A;
+}
+
+bool INT_Q_Z(Ratio R)
+{
+	return  (R.denum.a.size() == 1 && R.denum.a[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
+}
+// Конец модуля для дробей
