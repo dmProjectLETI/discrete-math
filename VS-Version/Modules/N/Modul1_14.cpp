@@ -9,7 +9,7 @@ struct Natural
 	vector<unsigned int> A;
 };
 
-bool COM_NN_D(Natural First, Natural Second)//1 Сравнивает два числа. Возвращает 1, 
+bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1, 
 {											// если первое больше или равно второму. 0 - если меньше.
 	if (First.A.size()<Second.A.size())
 		return 0;
