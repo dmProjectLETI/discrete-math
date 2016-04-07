@@ -15,6 +15,11 @@ struct Ratio
 	Integer num;
 	Natural denum;
 };
+struct Polynomial
+{
+	vector<ratio>C;
+	unsigned int k;
+};
 // Модуль для натуральных
 bool COM_NN_D(Natural First, Natural Second);//Сравнивает два числа. Возвращает 1,
 											// если первое больше или равно второму. 0 - если меньше.
