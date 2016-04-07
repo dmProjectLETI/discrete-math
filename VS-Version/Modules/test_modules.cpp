@@ -379,4 +379,14 @@ Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен 
 		M.C[i].num.A.A[0] = 0;
 	return M;
 }
+
+Ratio LED_P_Z (Polynomial B) //возвращает старший коэффициент многочлена
+{
+	return B.C[B.n]; 
+}
+
+int DEG_P_N (Polynomial B) // возвращает степень многочлена
+{
+	return B.n;
+}
 // конец модуля для многочленов
