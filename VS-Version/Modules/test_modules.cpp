@@ -4,9 +4,9 @@
 #include <conio.h>
 
 using namespace std;
-// Модуль для натуральных
-bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1,
-{											// если первое больше или равно второму. 0 - если меньше.
+// ГЊГ®Г¤ГіГ«Гј Г¤Г«Гї Г­Г ГІГіГ°Г Г«ГјГ­Г»Гµ
+bool COM_NN_D(Natural First, Natural Second)//Г‘Г°Г ГўГ­ГЁГўГ ГҐГІ Г¤ГўГ  Г·ГЁГ±Г«Г . Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ 1,
+{											// ГҐГ±Г«ГЁ ГЇГҐГ°ГўГ®ГҐ ГЎГ®Г«ГјГёГҐ ГЁГ«ГЁ Г°Г ГўГ­Г® ГўГІГ®Г°Г®Г¬Гі. 0 - ГҐГ±Г«ГЁ Г¬ГҐГ­ГјГёГҐ.
 	if (First.A.size() < Second.A.size())
 		return 0;
 	else
@@ -36,8 +36,8 @@ bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1
 	}
 }
 
-bool NZER_N_B(Natural chislo) //Проверяет число на не равенство нулю
-{							  //1- число положительное, 0 - число равно 0
+bool NZER_N_B(Natural chislo) //ГЏГ°Г®ГўГҐГ°ГїГҐГІ Г·ГЁГ±Г«Г® Г­Г  Г­ГҐ Г°Г ГўГҐГ­Г±ГІГўГ® Г­ГіГ«Гѕ
+{							  //1- Г·ГЁГ±Г«Г® ГЇГ®Г«Г®Г¦ГЁГІГҐГ«ГјГ­Г®ГҐ, 0 - Г·ГЁГ±Г«Г® Г°Г ГўГ­Г® 0
 	if (chislo.A.empty())
 		return 0;
 	else
@@ -52,7 +52,7 @@ bool NZER_N_B(Natural chislo) //Проверяет число на не равенство нулю
 	}
 }
 
-Natural ADD_1N_N(Natural chislo) //Прибавляет 1 к числу
+Natural ADD_1N_N(Natural chislo) //ГЏГ°ГЁГЎГ ГўГ«ГїГҐГІ 1 ГЄ Г·ГЁГ±Г«Гі
 {
 	int k = 1, i = 0;
 	do
@@ -76,7 +76,7 @@ Natural ADD_1N_N(Natural chislo) //Прибавляет 1 к числу
 	return chislo;
 }
 
-Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Складывает два числа
+Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Г‘ГЄГ«Г Г¤Г»ГўГ ГҐГІ Г¤ГўГ  Г·ГЁГ±Г«Г 
 {
 	if (!COM_NN_D(chislo1, chislo2))
 		chislo1.A.swap(chislo2.A);
@@ -100,9 +100,9 @@ Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Складывает два числа
 	return Sum;
 };
 
-Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа другое. Работает только
-{												//для неотрицательных результатов, поэтому перед вызовом этой функции
-	int p = 0;									//необходимо убедиться, что первое число не меньше второго
+Natural SUB_NN_N(Natural First, Natural Second) //Г‚Г»Г·ГЁГІГ ГҐГІ ГЁГ§ Г®Г¤Г­Г®ГЈГ® Г·ГЁГ±Г«Г  Г¤Г°ГіГЈГ®ГҐ. ГђГ ГЎГ®ГІГ ГҐГІ ГІГ®Г«ГјГЄГ®
+{												//Г¤Г«Гї Г­ГҐГ®ГІГ°ГЁГ¶Г ГІГҐГ«ГјГ­Г»Гµ Г°ГҐГ§ГіГ«ГјГІГ ГІГ®Гў, ГЇГ®ГЅГІГ®Г¬Гі ГЇГҐГ°ГҐГ¤ ГўГ»Г§Г®ГўГ®Г¬ ГЅГІГ®Г© ГґГіГ­ГЄГ¶ГЁГЁ
+	int p = 0;									//Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГіГЎГҐГ¤ГЁГІГјГ±Гї, Г·ГІГ® ГЇГҐГ°ГўГ®ГҐ Г·ГЁГ±Г«Г® Г­ГҐ Г¬ГҐГ­ГјГёГҐ ГўГІГ®Г°Г®ГЈГ®
 	for (int i = 0; i < Second.A.size(); ++i)
 	{
 		if (First.A[i] + 10 - Second.A[i] - p < 10)
@@ -141,7 +141,7 @@ Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа друго
 	return First;
 }
 
-Natural MUL_ND_N(Natural ch, int cifra) //Умножает число на цифру
+Natural MUL_ND_N(Natural ch, int cifra) //Г“Г¬Г­Г®Г¦Г ГҐГІ Г·ГЁГ±Г«Г® Г­Г  Г¶ГЁГґГ°Гі
 {
 	int s = 0;
 	Natural chislo;
@@ -158,14 +158,14 @@ Natural MUL_ND_N(Natural ch, int cifra) //Умножает число на цифру
 	return chislo;
 }
 
-Natural MUL_Nk_N(Natural &Input, int k) //Умножает число на 10^k
+Natural MUL_Nk_N(Natural &Input, int k) //Г“Г¬Г­Г®Г¦Г ГҐГІ Г·ГЁГ±Г«Г® Г­Г  10^k
 {
 	for (int i = 0; i < k; ++i)
 		Input.A.insert(Input.A.begin(), 0);
 	return Input;
 }
 
-Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Перемножает два числа
+Natural MUL_NN_N(Natural chislo1, Natural chislo2) //ГЏГҐГ°ГҐГ¬Г­Г®Г¦Г ГҐГІ Г¤ГўГ  Г·ГЁГ±Г«Г 
 {
 	Natural Proizved;
 	for (int i = 0; i < chislo2.A.size(); ++i)
@@ -175,13 +175,13 @@ Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Перемножает два числа
 	return Proizved;
 }
 
-Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Вычитает из первого числа второе, умноженное на цифру
-{															//аналогично вычитанию, перед вызовом необходимо убедиться,
-	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//что результат возможен, т.е. неотрицателен
+Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Г‚Г»Г·ГЁГІГ ГҐГІ ГЁГ§ ГЇГҐГ°ГўГ®ГЈГ® Г·ГЁГ±Г«Г  ГўГІГ®Г°Г®ГҐ, ГіГ¬Г­Г®Г¦ГҐГ­Г­Г®ГҐ Г­Г  Г¶ГЁГґГ°Гі
+{															//Г Г­Г Г«Г®ГЈГЁГ·Г­Г® ГўГ»Г·ГЁГІГ Г­ГЁГѕ, ГЇГҐГ°ГҐГ¤ ГўГ»Г§Г®ГўГ®Г¬ Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГіГЎГҐГ¤ГЁГІГјГ±Гї,
+	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//Г·ГІГ® Г°ГҐГ§ГіГ«ГјГІГ ГІ ГўГ®Г§Г¬Г®Г¦ГҐГ­, ГІ.ГҐ. Г­ГҐГ®ГІГ°ГЁГ¶Г ГІГҐГ«ГҐГ­
 }
 
-Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру частного, умноженную на 10^k,
-{													//где k - позиция этой цифры в частном
+Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Г‚Г»Г·ГЁГ±Г«ГїГҐГІ ГЇГҐГ°ГўГіГѕ Г¶ГЁГґГ°Гі Г·Г Г±ГІГ­Г®ГЈГ®, ГіГ¬Г­Г®Г¦ГҐГ­Г­ГіГѕ Г­Г  10^k,
+{													//ГЈГ¤ГҐ k - ГЇГ®Г§ГЁГ¶ГЁГї ГЅГІГ®Г© Г¶ГЁГґГ°Г» Гў Г·Г Г±ГІГ­Г®Г¬
 	Natural chislo;
 	int j = (chislo1.A.size() - 1);
 	for (int i = 0; i < chislo2.A.size(); ++i, --j)
@@ -199,7 +199,7 @@ Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру част
 	return MUL_Nk_N(chislo, j);
 }
 
-Natural DIV_NN_N(Natural delimoe, Natural delitel) //Находит неполное частное двух чисел
+Natural DIV_NN_N(Natural delimoe, Natural delitel) //ГЌГ ГµГ®Г¤ГЁГІ Г­ГҐГЇГ®Г«Г­Г®ГҐ Г·Г Г±ГІГ­Г®ГҐ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«
 {
 	Natural chastnoe;
 	if (!COM_NN_D(delimoe, delitel))
@@ -218,12 +218,12 @@ Natural DIV_NN_N(Natural delimoe, Natural delitel) //Находит неполное частное дв
 	}
 }
 
-Natural MOD_NN_N(Natural chislo1, Natural chislo2)//Находит остаток от деления первого числа на второе
+Natural MOD_NN_N(Natural chislo1, Natural chislo2)//ГЌГ ГµГ®Г¤ГЁГІ Г®Г±ГІГ ГІГ®ГЄ Г®ГІ Г¤ГҐГ«ГҐГ­ГЁГї ГЇГҐГ°ГўГ®ГЈГ® Г·ГЁГ±Г«Г  Г­Г  ГўГІГ®Г°Г®ГҐ
 {
 	return SUB_NN_N(chislo1, MUL_NN_N(DIV_NN_N(chislo1, chislo2), chislo2));
 }
 
-Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Находит НОД двух чисел
+Natural GCF_NN_N(Natural chislo1, Natural chislo2)//ГЌГ ГµГ®Г¤ГЁГІ ГЌГЋГ„ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«
 {
 	if (!COM_NN_D(chislo1, chislo2))
 		chislo1.A.swap(chislo2.A);
@@ -239,23 +239,23 @@ Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Находит НОД двух чисел
 	return chislo2;
 }
 
-Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Находит НОК двух чисел
+Natural LCM_NN_N(Natural chislo1, Natural chislo2)//ГЌГ ГµГ®Г¤ГЁГІ ГЌГЋГЉ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«
 {
 	return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
 }
 
-// Конец модуля для натуральных
+// ГЉГ®Г­ГҐГ¶ Г¬Г®Г¤ГіГ«Гї Г¤Г«Гї Г­Г ГІГіГ°Г Г«ГјГ­Г»Гµ
 
-// Модуль для целых
+// ГЊГ®Г¤ГіГ«Гј Г¤Г«Гї Г¶ГҐГ«Г»Гµ
 
-// Конец модуля для целых
+// ГЉГ®Г­ГҐГ¶ Г¬Г®Г¤ГіГ«Гї Г¤Г«Гї Г¶ГҐГ«Г»Гµ
 
-// Модуль для дробей
+// ГЊГ®Г¤ГіГ«Гј Г¤Г«Гї Г¤Г°Г®ГЎГҐГ©
 
 Ratio ADD_QQ_Q(Ratio A, Ratio B)
 {
 	Ratio C;
-	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	Natural temp = LCM_NN_N(A.denum, B.denum); // ГЏГ®ГЁГ±ГЄ ГЌГЋГЉ
 	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
 	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
 	C.num = ADD_ZZ_Z(A.num, B.num);
@@ -263,30 +263,42 @@ Ratio ADD_QQ_Q(Ratio A, Ratio B)
 	return C;
 }
 
-Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
-						  // Перед вызовом следует убедиться, что знаменатель равен единице
+Integer TRAN_Q_Z(Ratio b) // ГЏГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ Г¤Г°Г®ГЎГ­Г®ГЈГ® Гў Г¶ГҐГ«Г®ГҐ (Г…Г±Г«ГЁ Г§Г­Г Г¬ГҐГ­Г ГІГҐГ«Гј Г°Г ГўГҐГ­ 1)
+						  // ГЏГҐГ°ГҐГ¤ ГўГ»Г§Г®ГўГ®Г¬ Г±Г«ГҐГ¤ГіГҐГІ ГіГЎГҐГ¤ГЁГІГјГ±Гї, Г·ГІГ® Г§Г­Г Г¬ГҐГ­Г ГІГҐГ«Гј Г°Г ГўГҐГ­ ГҐГ¤ГЁГ­ГЁГ¶ГҐ
 {
-	return(b.num); // Госпожи, как же это сложно было
+	return(b.num); // ГѓГ®Г±ГЇГ®Г¦ГЁ, ГЄГ ГЄ Г¦ГҐ ГЅГІГ® Г±Г«Г®Г¦Г­Г® ГЎГ»Г«Г®
 }
 
 Ratio TRAN_Z_Q(Integer A)
 {
-	Ratio B; //дробь, которую возвращает функция
-	B.num = A; //число А в числитель
-	B.denum.a.push_back(1); //в знаменатель ставим 1
+	Ratio B; //Г¤Г°Г®ГЎГј, ГЄГ®ГІГ®Г°ГіГѕ ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГґГіГ­ГЄГ¶ГЁГї
+	B.num = A; //Г·ГЁГ±Г«Г® ГЂ Гў Г·ГЁГ±Г«ГЁГІГҐГ«Гј
+	B.denum.a.push_back(1); //Гў Г§Г­Г Г¬ГҐГ­Г ГІГҐГ«Гј Г±ГІГ ГўГЁГ¬ 1
 	return B;
 }
 
-Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
+Ratio RED_Q_Q(Ratio A) // Г”ГіГ­ГЄГ¶ГЁГї Г±Г®ГЄГ°Г Г№ГҐГ­ГЁГї Г¤Г°Г®ГЎГЁ
 {
-	Natural B = GVF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
-	A.num.A = DIV_ZZ_Z(A.num.A, B); // Делим числитель на НОД
-	A.denum = DIV_ZZ_Z(A.denum, B); // Делим знаменатель на НОД
+	Natural B = GVF_NN_N(A.num.A, A.denum); // ГЌГ ГµГ®Г¤ГЁГ¬ ГЌГЋГ„ Г®ГІ |Г·ГЁГ±Г«ГЁГІГҐГ«Гї| ГЁ Г§Г­Г Г¬ГҐГ­Г ГІГҐГ«Гї
+	A.num.A = DIV_ZZ_Z(A.num.A, B); // Г„ГҐГ«ГЁГ¬ Г·ГЁГ±Г«ГЁГІГҐГ«Гј Г­Г  ГЌГЋГ„
+	A.denum = DIV_ZZ_Z(A.denum, B); // Г„ГҐГ«ГЁГ¬ Г§Г­Г Г¬ГҐГ­Г ГІГҐГ«Гј Г­Г  ГЌГЋГ„
 	return A;
 }
 
 bool INT_Q_Z(Ratio R)
 {
-	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
+	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Г…Г±Г«ГЁ Г°Г Г§Г¬ГҐГ° Г§Г­Г Г¬ГҐГ­Г ГІГҐГ«Гї ГЁ ГЇГҐГ°ГўГ»Г© ГҐГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІ Г°Г ГўГ­Г» 1 - ГґГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г Г№Г ГҐГІ 1, ГЁГ­Г Г·ГҐ - 0
 }
-// Конец модуля для дробей
+// ГЉГ®Г­ГҐГ¶ Г¬Г®Г¤ГіГ«Гї Г¤Г«Гї Г¤Г°Г®ГЎГҐГ©
+//РњРѕРґСѓР»СЊ РґР»СЏ РјРЅРѕРіРѕС‡Р»РµРЅРѕРІ
+Polynomial MUL_Pxk_P(Polynomial M, int k) //СѓРјРЅРѕР¶Р°РµС‚ РјРЅРѕРіРѕС‡Р»РµРЅ РЅР° x^k
+{
+	M.n = M.n + k; //СѓРІРµР»РёС‡РёР»Р° СЃС‚РµРїРµРЅСЊ
+	M.C.resize(M.n + 1); //Р’С‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ
+	for (int i(M.n), j(k); j>0; i--, j--)
+		M.C[i] = M.C[i - k];
+	for (int i = 0; i <  k; i++)
+		M.C[i].num.A.A[0] = 0;
+	return M;
+}
+// РєРѕРЅРµС† РјРѕРґСѓР»СЏ РґР»СЏ РјРЅРѕРіРѕС‡Р»РµРЅРѕРІ
