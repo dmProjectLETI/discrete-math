@@ -10,7 +10,7 @@ struct Integer
 	Natural A;
 };
 
-int POZ_Z_D(Integer num) //Показатель знака, сигнатура.
+int POZ_Z_D(Integer num) //ГЏГ®ГЄГ Г§Г ГІГҐГ«Гј Г§Г­Г ГЄГ , Г±ГЁГЈГ­Г ГІГіГ°Г .
 {
 	if (!num.pos)
 		return -1;
@@ -19,19 +19,19 @@ int POZ_Z_D(Integer num) //Показатель знака, сигнатура.
 	return 0;
 }
 
-Natural ABS_Z_N(Integer num) //Модуль.
+Natural ABS_Z_N(Integer num) //ГЊГ®Г¤ГіГ«Гј.
 {
 	num.pos = true;
 	return num;
 }
 
-Integer MUL_Z_NEGZ(Integer num) //Умножение на -1.
+Integer MUL_Z_NEGZ(Integer num) //Г“Г¬Г­Г®Г¦ГҐГ­ГЁГҐ Г­Г  -1.
 {
 	num.pos = !num.pos;
 	return num;
 }
 
-Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух целых.
+Integer ADD_ZZ_Z(Integer first, Integer second) //Г‘Г«Г®Г¦ГҐГ­ГЁГҐ Г¤ГўГіГµ Г¶ГҐГ«Г»Гµ.
 {
 	Integer sum;
 	if (POZ_Z_D(first) <= 0)
@@ -58,7 +58,7 @@ Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух целых.
 	return sum;
 }
 
-Integer SUB_ZZ_Z(Integer first, Integer second) //Вычитание двух целых.
+Integer SUB_ZZ_Z(Integer first, Integer second) //Г‚Г»Г·ГЁГІГ Г­ГЁГҐ Г¤ГўГіГµ Г¶ГҐГ«Г»Гµ.
 {
 	Integer sub;
 	sub.pos = 1;
@@ -82,4 +82,5 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Вычитание двух целых.
 		else 
 			sub = ADD_ZZ_Z(first, second);
 	}
+	return sub;
 }
