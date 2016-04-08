@@ -84,3 +84,20 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ ö
 	}
 	return sub;
 }
+
+Integer MOD_ZZ_Z(Integer first, Integer second)
+{
+	Integer result;
+	result.pos = 1; //Result is always positive
+	if (!(NZER_N_B(second.A))) //If divisor is not equal to 0
+	{
+		result.A = MOD_NN_N(first.A, second.A);
+		if (NZER_N_B(result.A)) 
+			return result;
+		if ((POZ_Z_D(first) < 0)) //If dividend is negative
+			result.A = second.A - result.A; // If a < 0 then a mod b = |a|- (|a| mod |b|)
+		return result;
+    } 
+	else //If divisor is equal to 0
+		throw invalid_argument("Divided by 0");
+};
