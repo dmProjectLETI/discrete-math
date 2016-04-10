@@ -68,4 +68,6 @@ Polynomial SUB_PP_P(Polynomial M, Polynomial N) // вычитает многоч
 Polynomial MUL_Pxk_P(Polynomial M, int k); //умножает многочлен на x^k
 Ratio LED_P_Z (Polynomial B); //возвращает старший коэффициент многочлена
 int DEG_P_N (Polynomial B); //возвращает степень многочлена
+Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number); //Умножение многочлена на рациональное число
+Polynomial NMR_P_P(Polynomial chlen); //Преобразование многочлена — кратные корни в простые
 // Конец модуля для многочленов
