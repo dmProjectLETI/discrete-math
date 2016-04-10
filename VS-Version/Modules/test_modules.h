@@ -70,4 +70,6 @@ Ratio LED_P_Z (Polynomial B); //возвращает старший коэффи
 int DEG_P_N (Polynomial B); //возвращает степень многочлена
 Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number); //Умножение многочлена на рациональное число
 Polynomial NMR_P_P(Polynomial chlen); //Преобразование многочлена — кратные корни в простые
+Polynomial GCF_PP_P(Polynomial PA, Polynomial PB); //НОД многочленов
+Polynomial FAC_P_PQ(Polynomial P); //Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
 // Конец модуля для многочленов

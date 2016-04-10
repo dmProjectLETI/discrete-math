@@ -482,4 +482,42 @@ Polynomial NMR_P_P(Polynomial chlen) //Преобразование многоч
 
 		DIV_PP_P(chlen.C, GCF_PP_P(DER_P_P(chlen.C), chlen.C));
 }
+
+//Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
+Polynomial FAC_P_PQ(Polynomial P)
+{
+
+    Natural nok = P.C[0].denum;
+    for(int i = 1; i < P.k + 1; i++)
+        nok = LCM_NN_N(nok, P.C[i].denum);
+
+    Natural nod = ABS_Z_N(P.C[0].num);
+    for(int i = 1; i < P.k + 1; i++)
+        nod = GCF_NN_N(nod, ABS_Z_N(P.C[i].num));
+
+    for(int i = 0; i < P.k + 1; i++)
+        P.C[i].num = DIV_ZZ_Z(P.C[i].num, TRANS_N_Z(nod));
+
+    for(int i = 0; i < P.k + 1; i++)
+        P.C[i].denum = DIV_ZZ_Z(P.C[i].denum, TRANS_N_Z(nok));
+
+    return P;
+}
+
+//НОД многочленов
+Polynomial GCF_PP_P(Polynomial PA, Polynomial PB)
+{
+    if(PA.k < PB.k)
+        return GCF_PP_P(PB, PA);
+
+    while(PA.k != 0 || PA.C[0] != 0)
+    {
+        PA = MOD_PP_P(PA, PB);
+        Polynomial T = PA;
+        PA = PB;
+        PB = T;
+    }
+
+    return PB;
+}
 // конец модуля для многочленов
