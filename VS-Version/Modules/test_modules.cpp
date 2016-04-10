@@ -420,6 +420,32 @@ bool INT_Q_Z(Ratio R)
 }
 // Êîíåö ìîäóëÿ äëÿ äðîáåé
 //Модуль для многочленов
+Polynomial ADD_PP_P(Polynomial M, Polynomial N) // складывает многочлены
+{
+	Polynomial B;
+	if (M.n > N.n)
+		N.C.resize (M.C.size());
+	else
+		M.C.resize (N.C.size());
+	B.C.resize(M.C.size());
+	for(int i = 0; i < M.n + 1; i++)
+		B.C[i] = ADD_QQ_Q (M.C[i], N.C[i]);
+	return B;
+}
+
+Polynomial SUB_PP_P(Polynomial M, Polynomial N) // вычитает многочлены
+{
+	Polynomial B;
+	if (M.n > N.n)
+		N.C.resize (M.C.size());
+	else
+		M.C.resize (N.C.size());
+	B.C.resize(M.C.size());
+	for(int i = 0; i < M.n + 1; i++)
+		B.C[i] = SUB_ZZ_Z (M.C[i], N.C[i]);
+	return B;
+}
+
 Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен на x^k
 {
 	M.n = M.n + k; //увеличила степень
