@@ -282,7 +282,7 @@ Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öå
 			sum = MUL_Z_NEGZ(sum);
 		}
 		else {
-			if (ABS_Z_N(first) > ABS_Z_N(second)) {
+			if (first.A > second.A) {
 				sum = MUL_Z_NEGZ(sum);
 			} 
 			sum.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
@@ -291,7 +291,7 @@ Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öå
 		if (POZ_Z_D(second) >= 0)
 			sum.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
 		else {
-			if (ABS_Z_N(second) > ABS_Z_N(first)) {
+			if (second.A > first.A) {
 				sum = MUL_Z_NEGZ(sum);
 			}
 			sum.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
@@ -305,7 +305,7 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ ö
 	sub.pos = 1;
 	if (POZ_Z_D(first) <= 0) 
 		if (POZ_Z_D(second) <= 0) {
-			if (ABS_Z_N(first) > ABS_Z_N(second)) {
+			if (first.A > second.A) {
 				sum = MUL_Z_NEGZ(sum);
 			}
 			sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
@@ -315,7 +315,7 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ ö
 		}
 	else {
 		if (POZ_Z_D(second) >= 0) {
-			if (ABS_Z_N(second) > ABS_Z_N(first)) {
+			if (second.A > first.A) {
 				sum = MUL_Z_NEGZ(sum);
 			}
 			sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
