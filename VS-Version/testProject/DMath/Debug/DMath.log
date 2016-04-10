@@ -1,0 +1,12 @@
+﻿  test_modules.cpp
+e:\anton\programming\dmath\dmath\test_modules.cpp(44): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(83): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(89): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(117): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(146): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(169): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(185): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(35): warning C4715: COM_NN_D: значение возвращается не при всех путях выполнения
+  DMath.vcxproj -> E:\Anton\Programming\DMath\Debug\DMath.exe
+  DMath.vcxproj -> E:\Anton\Programming\DMath\Debug\DMath.pdb (Partial PDB)
