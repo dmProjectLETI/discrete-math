@@ -466,4 +466,20 @@ int DEG_P_N (Polynomial B) // возвращает степень многочл
 {
 	return B.n;
 }
+
+Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number) //Умножение многочлена на рациональное число
+{
+	for (unsigned int i = 0; i > chlen.n - 1; i++)
+	{
+		MUL_ZZ_Z(chlen.C[i].num.A[i], ratio_number.num.A[i]);
+		MUL_ZZ_Z(chlen.C[i].denum.A[i], ratio_number.denum.A[i]);
+	}
+	return chlen;
+}
+
+Polynomial NMR_P_P(Polynomial chlen) //Преобразование многочлена — кратные корни в простые
+{
+
+		DIV_PP_P(chlen.C, GCF_PP_P(DER_P_P(chlen.C), chlen.C));
+}
 // конец модуля для многочленов
