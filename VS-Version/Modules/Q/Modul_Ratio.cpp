@@ -1,4 +1,4 @@
-Ratio ADD_QQ_Q(Ratio A, Ratio B)
+Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей
 {
 	Ratio C;
 	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
@@ -15,7 +15,7 @@ Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в ц
 	return(b.num); 
 }
 
-Ratio TRAN_Z_Q(Integer A)
+Ratio TRAN_Z_Q(Integer A) // Преобразование целого в дробное
 {
 	Ratio B; //дробь, которую возвращает функция
 	B.num = A; //число А в числитель
@@ -31,7 +31,7 @@ Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
 	return A;
 }
 
-bool INT_Q_Z(Ratio R)
+bool INT_Q_Z(Ratio R) //Проверка на целое, если рациональное число является целым, то «да», иначе «нет»
 {
 	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
 }
@@ -50,4 +50,15 @@ Ratio DIV_QQ_Q (Ratio A, Ratio B) //деление дробных чисел
  C.num = MUL_ZZ_Z(A.num.A, B.denum);
  C.denum = MUL_ZZ_Z(A.denum, B.num.A);
  return RED_Q_Q(C);
+}
+
+Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей
+	{
+	Ratio C;
+	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	C.num = SUB_ZZ_Zs(A.num, B.num);
+	C.denum = temp;
+	return C;
 }
