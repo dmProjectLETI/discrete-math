@@ -95,7 +95,7 @@ Integer MOD_ZZ_Z(Integer first, Integer second)
 		if (NZER_N_B(result.A)) 
 			return result;
 		if ((POZ_Z_D(first) < 0)) //If dividend is negative
-			result.A = second.A - result.A; // If a < 0 then a mod b = |a|- (|a| mod |b|)
+			result.A = SUB_ZZ_Z(second.A, result.A); // If a < 0 then a mod b = |a|- (|a| mod |b|)
 		return result;
     } 
 	else //If divisor is equal to 0
