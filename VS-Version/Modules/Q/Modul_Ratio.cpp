@@ -12,7 +12,7 @@ Ratio ADD_QQ_Q(Ratio A, Ratio B)
 Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
 						  // Перед вызовом следует убедиться, что знаменатель равен единице
 {
-	return(b.num); // Госпожи, как же это сложно было
+	return(b.num); 
 }
 
 Ratio TRAN_Z_Q(Integer A)
@@ -34,4 +34,20 @@ Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
 bool INT_Q_Z(Ratio R)
 {
 	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
+}
+Ratio MUL_QQ_Q (Ratio A, Ratio B) //умножение дробных чисел
+{
+ Ratio C;
+ C.num = MUL_ZZ_Z(A.num.A, B.num.A);    // перемножение числителей
+ C.denum = MUL_ZZ_Z(A.denum, B.denum); // перемножение знаменателей 
+ return RED_Q_Q(C);                   // возвращается сокращенная дробь
+}
+
+
+Ratio DIV_QQ_Q (Ratio A, Ratio B) //деление дробных чисел
+{  
+ Ratio C;
+ C.num = MUL_ZZ_Z(A.num.A, B.denum);
+ C.denum = MUL_ZZ_Z(A.denum, B.num.A);
+ return RED_Q_Q(C);
 }
