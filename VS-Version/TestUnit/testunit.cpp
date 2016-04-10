@@ -49,7 +49,7 @@ Natural generateNatural()
     else
         for(int i = 0; i < n; i == n - 1 ? A[i] = rand() % 9 + 1 : A[i] = rand() % 10, i++);
     N.A = A;
-    
+
     return N;
 }
 
@@ -63,7 +63,7 @@ Natural generateNatural(unsigned n)
         n /= 10;
     } while(n != 0);
     N.A = A;
-    
+
     return N;
 }
 
@@ -72,7 +72,7 @@ Integer generateInteger()
     Integer I = Integer();
     I.A = generateNatural();
     I.b = rand() % 2;
-    
+
     return I;
 }
 
@@ -81,7 +81,7 @@ Integer generateInteger(int n)
     Integer I = Integer();
     I.A = generateNatural(n);
     I.b = n >= 0;
-    
+
     return I;
 }
 
@@ -95,19 +95,37 @@ Ratio generateRatio()
         N = generateNatural();
     } while(N.A[N.A.size() - 1] == 0);
     R.denum = N;
-    
+
+    return R;
+}
+
+Ratio generateRatio(int n, unsigned dn)
+{
+    Ratio R = Ratio();
+    R.num = generateInteger(n);
+    R.denum = generateNatural(dn);
+
     return R;
 }
 
 Polynomial generatePolynomial()
 {
     Polynomial P = Polynomial();
-    
+
     int n = rand() % 10 + 1;
     vector<Ratio> v(n);
     for(int i = 0; i < n; v[i] = generateRatio(), i++);
     P.k = n - 1;
     P.C = v;
-    
+
+    return P;
+}
+
+Polynomial generatePolynomial(vector<Ratio> v)
+{
+    Polynomial P = Polynomial();
+    P.C = v;
+    P.k = v.size() - 1;
+
     return P;
 }
