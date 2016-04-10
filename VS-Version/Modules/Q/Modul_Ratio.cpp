@@ -1,7 +1,7 @@
 Ratio ADD_QQ_Q(Ratio A, Ratio B)
 {
 	Ratio C;
-	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	Natural temp = LCM_NN_N(A.denum, B.denum); // РџРѕРёСЃРє РќРћРљ
 	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
 	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
 	C.num = ADD_ZZ_Z(A.num, B.num);
@@ -9,42 +9,42 @@ Ratio ADD_QQ_Q(Ratio A, Ratio B)
 	return C;
 }
 
-Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
-						  // Перед вызовом следует убедиться, что знаменатель равен единице
+Integer TRAN_Q_Z(Ratio b) // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РґСЂРѕР±РЅРѕРіРѕ РІ С†РµР»РѕРµ (Р•СЃР»Рё Р·РЅР°РјРµРЅР°С‚РµР»СЊ СЂР°РІРµРЅ 1)
+						  // РџРµСЂРµРґ РІС‹Р·РѕРІРѕРј СЃР»РµРґСѓРµС‚ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ Р·РЅР°РјРµРЅР°С‚РµР»СЊ СЂР°РІРµРЅ РµРґРёРЅРёС†Рµ
 {
 	return(b.num); 
 }
 
 Ratio TRAN_Z_Q(Integer A)
 {
-	Ratio B; //дробь, которую возвращает функция
-	B.num = A; //число А в числитель
-	B.denum.a.push_back(1); //в знаменатель ставим 1
+	Ratio B; //РґСЂРѕР±СЊ, РєРѕС‚РѕСЂСѓСЋ РІРѕР·РІСЂР°С‰Р°РµС‚ С„СѓРЅРєС†РёСЏ
+	B.num = A; //С‡РёСЃР»Рѕ Рђ РІ С‡РёСЃР»РёС‚РµР»СЊ
+	B.denum.a.push_back(1); //РІ Р·РЅР°РјРµРЅР°С‚РµР»СЊ СЃС‚Р°РІРёРј 1
 	return B;
 }
 
-Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
+Ratio RED_Q_Q(Ratio A) // Р¤СѓРЅРєС†РёСЏ СЃРѕРєСЂР°С‰РµРЅРёСЏ РґСЂРѕР±Рё
 {
-	Natural B = GVF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
-	A.num.A = DIV_ZZ_Z(A.num.A, B); // Делим числитель на НОД
-	A.denum = DIV_ZZ_Z(A.denum, B); // Делим знаменатель на НОД
+	Natural B = GVF_NN_N(A.num.A, A.denum); // РќР°С…РѕРґРёРј РќРћР” РѕС‚ |С‡РёСЃР»РёС‚РµР»СЏ| Рё Р·РЅР°РјРµРЅР°С‚РµР»СЏ
+	A.num.A = DIV_ZZ_Z(A.num.A, B); // Р”РµР»РёРј С‡РёСЃР»РёС‚РµР»СЊ РЅР° РќРћР”
+	A.denum = DIV_ZZ_Z(A.denum, B); // Р”РµР»РёРј Р·РЅР°РјРµРЅР°С‚РµР»СЊ РЅР° РќРћР”
 	return A;
 }
 
 bool INT_Q_Z(Ratio R)
 {
-	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
+	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Р•СЃР»Рё СЂР°Р·РјРµСЂ Р·РЅР°РјРµРЅР°С‚РµР»СЏ Рё РїРµСЂРІС‹Р№ РµРіРѕ СЌР»РµРјРµРЅС‚ СЂР°РІРЅС‹ 1 - С„СѓРЅРєС†РёСЏ РІРѕР·РІСЂР°С‰Р°РµС‚ 1, РёРЅР°С‡Рµ - 0
 }
-Ratio MUL_QQ_Q (Ratio A, Ratio B) //умножение дробных чисел
+Ratio MUL_QQ_Q (Ratio A, Ratio B) //СѓРјРЅРѕР¶РµРЅРёРµ РґСЂРѕР±РЅС‹С… С‡РёСЃРµР»
 {
  Ratio C;
- C.num = MUL_ZZ_Z(A.num.A, B.num.A);    // перемножение числителей
- C.denum = MUL_ZZ_Z(A.denum, B.denum); // перемножение знаменателей 
- return RED_Q_Q(C);                   // возвращается сокращенная дробь
+ C.num = MUL_ZZ_Z(A.num.A, B.num.A);    // РїРµСЂРµРјРЅРѕР¶РµРЅРёРµ С‡РёСЃР»РёС‚РµР»РµР№
+ C.denum = MUL_ZZ_Z(A.denum, B.denum); // РїРµСЂРµРјРЅРѕР¶РµРЅРёРµ Р·РЅР°РјРµРЅР°С‚РµР»РµР№ 
+ return RED_Q_Q(C);                   // РІРѕР·РІСЂР°С‰Р°РµС‚СЃСЏ СЃРѕРєСЂР°С‰РµРЅРЅР°СЏ РґСЂРѕР±СЊ
 }
 
 
-Ratio DIV_QQ_Q (Ratio A, Ratio B) //деление дробных чисел
+Ratio DIV_QQ_Q (Ratio A, Ratio B) //РґРµР»РµРЅРёРµ РґСЂРѕР±РЅС‹С… С‡РёСЃРµР»
 {  
  Ratio C;
  C.num = MUL_ZZ_Z(A.num.A, B.denum);
