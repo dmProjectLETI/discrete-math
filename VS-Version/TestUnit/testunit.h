@@ -6,7 +6,7 @@
  *
  * Before using that recommend to do "srand(time(0));"
  * for best random varys
-*/
+ */
 
 #ifndef TESTUNIT_H
 #define TESTUNIT_H
@@ -56,5 +56,9 @@ Ratio generateRatio();
 Integer generateInteger();
 //return random-generated Natural
 Natural generateNatural();
+//return Natural that generate by n
+Natural generateNatural(unsigned n);
+//return Integer that generate by i
+Integer generateInteger(int i);
 
 #endif // TESTUNIT_H

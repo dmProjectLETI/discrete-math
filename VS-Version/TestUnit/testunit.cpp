@@ -3,7 +3,7 @@
 
 void writeNatural(Natural N)
 {
-    for(int i = 0; i < N.A.size(); cout << N.A[i], i++);
+    for(int i = N.A.size() - 1; i >= 0; cout << N.A[i], i--);
 }
 
 void writeInteger(Integer I)
@@ -21,17 +21,17 @@ void writeRatio(Ratio R)
 
 void writePolynomial(Polynomial P)
 {
-    for(int i = 0; i < P.C.size(); i++)
+    for(int i = P.C.size() - 1; i >= 0; i--)
     {
         cout << "[";
         writeRatio(P.C[i]);
-        cout << " * x^" << P.k - i << "]";
-        if(i + 1 < P.C.size())
+        cout << " * x^" << i << "]";
+        if(i - 1 >= 0)
         {
-            if(P.C[i + 1].num.b)
+            if(P.C[i - 1].num.b)
             {
                 cout << " - ";
-                P.C[i + 1].num.b = false;
+                P.C[i - 1].num.b = false;
             }
             else
                 cout << " + ";
@@ -47,9 +47,23 @@ Natural generateNatural()
     if(n == 1)
         A[0] = rand() % 9 + 1;
     else
-        for(int i = 0; i < n; i == 0 ? A[i] = rand() % 9 + 1 : A[i] = rand() % 10, i++);
+        for(int i = 0; i < n; i == n - 1 ? A[i] = rand() % 9 + 1 : A[i] = rand() % 10, i++);
     N.A = A;
+    
+    return N;
+}
 
+Natural generateNatural(unsigned n)
+{
+    Natural N = Natural();
+    vector<unsigned int> A;
+    do
+    {
+        A.insert(A.end(), n % 10);
+        n /= 10;
+    } while(n != 0);
+    N.A = A;
+    
     return N;
 }
 
@@ -58,7 +72,16 @@ Integer generateInteger()
     Integer I = Integer();
     I.A = generateNatural();
     I.b = rand() % 2;
+    
+    return I;
+}
 
+Integer generateInteger(int n)
+{
+    Integer I = Integer();
+    I.A = generateNatural(n);
+    I.b = n >= 0;
+    
     return I;
 }
 
@@ -70,21 +93,21 @@ Ratio generateRatio()
     do
     {
         N = generateNatural();
-    } while(N.A[0] == 0);
+    } while(N.A[N.A.size() - 1] == 0);
     R.denum = N;
-
+    
     return R;
 }
 
 Polynomial generatePolynomial()
 {
     Polynomial P = Polynomial();
-
+    
     int n = rand() % 10 + 1;
     vector<Ratio> v(n);
     for(int i = 0; i < n; v[i] = generateRatio(), i++);
     P.k = n - 1;
     P.C = v;
-
+    
     return P;
 }
