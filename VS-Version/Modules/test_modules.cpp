@@ -213,7 +213,7 @@ Natural DIV_NN_N(Natural delimoe, Natural delitel) //Íàõîäèò íåïîëí
 		{
 			chastnoe = ADD_NN_N(chastnoe, DIV_NN_Dk(delimoe, delitel));
 			delimoe = SUB_NN_N(delimoe, MUL_NN_N(delitel, DIV_NN_Dk(delimoe, delitel)));
-		} while (!COM_NN_D(delitel, delimoe));
+		} while (COM_NN_D(delimoe, delitel));
 		return chastnoe;
 	}
 }
