@@ -379,12 +379,12 @@ void DIV_NN_N(Natural first,Natural second) //Частное от деления
 }
 // Êîíåö ìîäóëÿ äëÿ öåëûõ
 
-// Ìîäóëü äëÿ äðîáåé
+// Модуль для дробей
 
-Ratio ADD_QQ_Q(Ratio A, Ratio B)
+Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей
 {
 	Ratio C;
-	Natural temp = LCM_NN_N(A.denum, B.denum); // Ïîèñê ÍÎÊ
+	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
 	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
 	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
 	C.num = ADD_ZZ_Z(A.num, B.num);
@@ -392,33 +392,58 @@ Ratio ADD_QQ_Q(Ratio A, Ratio B)
 	return C;
 }
 
-Integer TRAN_Q_Z(Ratio b) // Ïðåîáðàçîâàíèå äðîáíîãî â öåëîå (Åñëè çíàìåíàòåëü ðàâåí 1)
-						  // Ïåðåä âûçîâîì ñëåäóåò óáåäèòüñÿ, ÷òî çíàìåíàòåëü ðàâåí åäèíèöå
+Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
+						  // Перед вызовом следует убедиться, что знаменатель равен единице
 {
-	return(b.num); // Ãîñïîæè, êàê æå ýòî ñëîæíî áûëî
+	return(b.num); 
 }
 
-Ratio TRAN_Z_Q(Integer A)
+Ratio TRAN_Z_Q(Integer A) // Преобразование целого в дробное
 {
-	Ratio B; //äðîáü, êîòîðóþ âîçâðàùàåò ôóíêöèÿ
-	B.num = A; //÷èñëî À â ÷èñëèòåëü
-	B.denum.a.push_back(1); //â çíàìåíàòåëü ñòàâèì 1
+	Ratio B;//дробь, которую возвращает функция
+	B.num = A; //число А в числитель
+	B.denum.a.push_back(1); //в знаменатель ставим 1
 	return B;
 }
 
-Ratio RED_Q_Q(Ratio A) // Ôóíêöèÿ ñîêðàùåíèÿ äðîáè
+Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
 {
-	Natural B = GVF_NN_N(A.num.A, A.denum); // Íàõîäèì ÍÎÄ îò |÷èñëèòåëÿ| è çíàìåíàòåëÿ
-	A.num.A = DIV_ZZ_Z(A.num.A, B); // Äåëèì ÷èñëèòåëü íà ÍÎÄ
-	A.denum = DIV_ZZ_Z(A.denum, B); // Äåëèì çíàìåíàòåëü íà ÍÎÄ
+	Natural B = GVF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
+	A.num.A = DIV_ZZ_Z(A.num.A, B); // Делим числитель на НОД
+	A.denum = ABS_Z_N(DIV_ZZ_Z(A.denum, B)); // Делим знаменатель на НОД
 	return A;
 }
 
-bool INT_Q_Z(Ratio R)
+bool INT_Q_Z(Ratio R)//Проверка на целое, если рациональное число является целым, то «да», иначе «нет»
 {
-	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Åñëè ðàçìåð çíàìåíàòåëÿ è ïåðâûé åãî ýëåìåíò ðàâíû 1 - ôóíêöèÿ âîçâðàùàåò 1, èíà÷å - 0
+	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
 }
-// Êîíåö ìîäóëÿ äëÿ äðîáåé
+Ratio MUL_QQ_Q (Ratio A, Ratio B) //умножение дробных чисел
+{
+ A.num = MUL_ZZ_Z(A.num, B.num);    // перемножение числителей
+ A.denum = A.denum * B.denum; // перемножение знаменателей 
+ return RED_Q_Q(A);                   // возвращается сокращенная дробь
+}
+Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей
+	{
+	Ratio C;
+	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	C.num = SUB_ZZ_Zs(A.num, B.num);
+	C.denum = temp;
+	return C;
+}
+Ratio DIV_QQ_Q (Ratio A, Ratio B) //деление дробных чисел
+{  
+ Ratio C;
+ C.num = MUL_ZZ_Z(A.num, B.denum);
+ if(B.num.A < 0)
+	(B.num.b) ? B.num.b = 0 : B.num.b = 1;
+ C.denum = A.denum * B.num.A;
+ return RED_Q_Q(C);
+}
+// Конец модуля для дробей
 //Модуль для многочленов
 Polynomial ADD_PP_P(Polynomial M, Polynomial N) // складывает многочлены
 {
