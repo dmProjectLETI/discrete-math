@@ -10,7 +10,7 @@ Architects : Dmitry Predtechensky, Kuzmin Timofey,
               Vlad Kovalchuk, Kuzina Darya
 
 Folder "VS-Version" contain all modules for work with natural(Modules\N),
-whole(Modules\Z) and rational(Modules\Q) numbers, also it's contain module for
+integer(Modules\Z) and rational(Modules\Q) numbers, also it's contain module for
 working with polynomial with natural indexes(Modules\P).
 
 Folder "Qt-Version" contain project from Qt Creator which is GUI-version
