@@ -38,7 +38,7 @@ bool INT_Q_Z(Ratio R) //Проверка на целое, если рацион�
 Ratio MUL_QQ_Q (Ratio A, Ratio B) //умножение дробных чисел
 {
  A.num = MUL_ZZ_Z(A.num.A, B.num.A);    // перемножение числителей
- A.denum = A.denum *B.denum; // перемножение знаменателей 
+ A.denum = MUL_ZZ_Z(A.denum, B.denum); // перемножение знаменателей 
  return RED_Q_Q(A);                   // возвращается сокращенная дробь
 }
 
@@ -46,10 +46,8 @@ Ratio MUL_QQ_Q (Ratio A, Ratio B) //умножение дробных чисел
 Ratio DIV_QQ_Q (Ratio A, Ratio B) //деление дробных чисел
 {  
  Ratio C;
- C.num = MUL_ZZ_Z(A.num, B.denum);
- if(B.num.A < 0)
-	(B.num.b) ? B.num.b = 0 : B.num.b = 1;
- C.denum = A.denum * B.num.A;
+ C.num = MUL_ZZ_Z(A.num.A, B.denum);
+ C.denum = MUL_ZZ_Z(A.denum, B.num.A);
  return RED_Q_Q(C);
 }
 
