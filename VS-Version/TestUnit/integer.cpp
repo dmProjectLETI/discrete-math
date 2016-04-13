@@ -118,7 +118,7 @@ Integer MOD_ZZ_Z(Integer first, Natural second)
 		return result;
 };
 
-Integer DIV_ZZ_Z(Integer first, Integer second) //Частное от деления большего целого числа на меньшее 
+Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее 
 											 //или равное натуральное с остатком (делитель отличен от нуля)
 {
 	Integer div;
@@ -126,8 +126,6 @@ Integer DIV_ZZ_Z(Integer first, Integer second) //Частное от делен
 	div.A=DIV_NN_N(first.A, second.A);
 
 	if (POZ_Z_D(first) == -1)
-		MUL_Z_NEGZ(div);
-	if (POZ_Z_D(second) == -1)
 		MUL_Z_NEGZ(div);
 
 	return div;
