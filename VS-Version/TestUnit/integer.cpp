@@ -26,9 +26,15 @@ Integer TRANS_N_Z(Natural num)
 	return newNum;
 }
 
-Natural ABS_Z_N(Integer num) //Ìîäóëü.
+Natural TRANS_Z_N(Integer num) 
 {
 	return num.A;
+}
+
+Integer ABS_Z_N(Integer num) //??????.
+{
+	num.pos = 1;
+	return num;
 }
 
 Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
