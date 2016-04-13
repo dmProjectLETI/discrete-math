@@ -108,15 +108,16 @@ Integer MUL_ZZ_Z(Integer first, Integer second) {
 	return mul;
 }
 
-Integer MOD_ZZ_Z(Integer first, Natural second)
+Natural MOD_ZZ_Z(Integer first, Natural second)
 {
-	Integer result;
+	Natural result;
 
-		result.A = MOD_NN_N(first.A, second);
+		result = MOD_NN_N(first.A, second);
 		if ((POZ_Z_D(first) < 0)) //If dividend is negative
-			result = SUB_ZZ_Z(TRANS_N_Z(second), TRANS_N_Z(result.A)); // If a < 0 then a mod b = |a|- (|a| mod |b|)
+			result = MOD_NN_N(ADD_NN_N(second, result), second);
 		return result;
 };
+
 
 Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее 
 											 //или равное натуральное с остатком (делитель отличен от нуля)
