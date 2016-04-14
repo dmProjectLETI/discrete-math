@@ -178,8 +178,8 @@ int main()
     do
     {
         //naturalTest();
-        //integerTest();
-        ratioTest();
+        integerTest();
+        //ratioTest();
         //polynomialTest();
         cin >> c;
     } while(c != 'q');
