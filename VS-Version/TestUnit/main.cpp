@@ -2,7 +2,6 @@
 #include "testunit.h"
 #include "natural.h"
 #include "integer.h"
-#include "polynomial.h"
 #include "ratio.h"
 #include <ctime>
 
@@ -62,6 +61,9 @@ void integerTest()
     A = generateInteger(a);
     B = generateInteger(b);
 
+    Natural N;
+    N = generateNatural(static_cast<unsigned>(abs(b)));
+
     cout << "Определение знака целого числа"
          << endl << POZ_Z_D(A) << endl << endl;
     cout << "Модуль целого."
@@ -73,9 +75,9 @@ void integerTest()
     cout << "Вычитание двух целых."
          << endl; writeInteger(SUB_ZZ_Z(A, B)); cout << endl << endl;
     cout << "Остаток от деления двух целых"
-         << endl; writeInteger(MOD_ZZ_Z(A, B)); cout << endl << endl;
+         << endl; writeInteger(MOD_ZZ_Z(A, N)); cout << endl << endl;
     cout << "Частное от деления двух целых"
-         << endl; writeInteger(DIV_ZZ_Z(A, B)); cout << endl << endl;
+         << endl; writeInteger(DIV_ZZ_Z(A, N)); cout << endl << endl;
 }
 
 void ratioTest()
@@ -106,7 +108,7 @@ void ratioTest()
     cout << "Если рациональное число - целое, то 1, иначе 0"
          << endl << INT_Q_Z(A) << endl << endl;
 }
-
+/*
 Polynomial readPolynomial()
 {
     unsigned n;
@@ -166,7 +168,7 @@ void polynomialTest()
     cout << "Функция вынесения из многочлена НОК знаменателей коэффициентов и НОД числителей"
          << endl; writePolynomial(FAC_P_PQ(A)); cout << endl << endl;
 }
-
+*/
 int main()
 {
     setlocale(0, "");
@@ -177,7 +179,7 @@ int main()
     {
         //naturalTest();
         //integerTest();
-        //ratioTest();
+        ratioTest();
         //polynomialTest();
         cin >> c;
     } while(c != 'q');

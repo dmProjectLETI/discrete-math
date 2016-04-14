@@ -1,4 +1,5 @@
 #include "testunit.h"
+
 #include <iostream>
 
 void writeNatural(Natural N)
@@ -8,7 +9,7 @@ void writeNatural(Natural N)
 
 void writeInteger(Integer I)
 {
-    cout << (I.b ? " - " : "");
+    cout << (!I.pos ? " - " : "");
     writeNatural(I.A);
 }
 
@@ -28,10 +29,10 @@ void writePolynomial(Polynomial P)
         cout << " * x^" << i << "]";
         if(i - 1 >= 0)
         {
-            if(P.C[i - 1].num.b)
+            if(P.C[i - 1].num.pos)
             {
                 cout << " - ";
-                P.C[i - 1].num.b = false;
+                P.C[i - 1].num.pos = false;
             }
             else
                 cout << " + ";
@@ -71,7 +72,7 @@ Integer generateInteger()
 {
     Integer I = Integer();
     I.A = generateNatural();
-    I.b = rand() % 2;
+    I.pos = rand() % 2;
 
     return I;
 }
@@ -79,8 +80,8 @@ Integer generateInteger()
 Integer generateInteger(int n)
 {
     Integer I = Integer();
-    I.A = generateNatural(n);
-    I.b = n >= 0;
+    I.A = generateNatural(abs(n));
+    I.pos = n >= 0;
 
     return I;
 }
@@ -115,7 +116,7 @@ Polynomial generatePolynomial()
     int n = rand() % 10 + 1;
     vector<Ratio> v(n);
     for(int i = 0; i < n; v[i] = generateRatio(), i++);
-    P.k = n - 1;
+    P.n = n - 1;
     P.C = v;
 
     return P;
@@ -125,7 +126,7 @@ Polynomial generatePolynomial(vector<Ratio> v)
 {
     Polynomial P = Polynomial();
     P.C = v;
-    P.k = v.size() - 1;
+    P.n = v.size() - 1;
 
     return P;
 }

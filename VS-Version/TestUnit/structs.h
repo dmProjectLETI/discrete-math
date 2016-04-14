@@ -11,7 +11,7 @@ struct Natural
 };
 struct Integer
 {
-    bool b;
+    bool pos = true;
     Natural A;
 };
 struct Ratio
@@ -22,7 +22,7 @@ struct Ratio
 struct Polynomial
 {
     vector<Ratio>C;
-    unsigned int k;
+    unsigned int n;
 };
 
 #endif // STRUCTS_H

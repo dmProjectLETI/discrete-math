@@ -1,3 +1,6 @@
+#include "natural.h"
+#include "integer.h"
+#include "ratio.h"
 #include "polynomial.h"
 
 Polynomial ADD_PP_P(Polynomial M, Polynomial N) // складывает многочлены
@@ -9,7 +12,7 @@ Polynomial ADD_PP_P(Polynomial M, Polynomial N) // складывает мног
         M.C.resize (N.C.size());
     B.C.resize(M.C.size());
     for(int i = 0; i < M.n + 1; i++)
-        B.C[i] = ADD_QQ_Q (M.C[i], N.C[i]);
+        B.C[i] = ADD_QQ_Q(M.C[i], N.C[i]);
     return B;
 }
 
@@ -22,7 +25,7 @@ Polynomial SUB_PP_P(Polynomial M, Polynomial N) // вычитает многоч
         M.C.resize (N.C.size());
     B.C.resize(M.C.size());
     for(int i = 0; i < M.n + 1; i++)
-        B.C[i] = SUB_ZZ_Z (M.C[i], N.C[i]);
+        B.C[i] = SUB_ZZ_Z(M.C[i], N.C[i]);
     return B;
 }
 
