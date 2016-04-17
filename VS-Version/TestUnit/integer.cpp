@@ -34,36 +34,36 @@ Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
 
 Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öåëûõ.
 {
-    Integer sum;
+	Integer sum;
 
-    if (POZ_Z_D(first) <= 0)
-    {
-        if (POZ_Z_D(second) <= 0)
-        {
-            sum.A = ADD_NN_N(first.A, second.A);
-            sum = MUL_Z_NEGZ(sum);
-        }
-        else
-        {
-            if (COM_NN_D(first.A, second.A))
-            {
-                sum.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-                sum = MUL_Z_NEGZ(sum);
-            }
-            else
-                sum = SUB_ZZ_Z(second, first);
-        }
-    }
-    else
-        if (POZ_Z_D(second) >= 0)
-            sum.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-        else {
-            if (!COM_NN_D(first.A, second.A)) {
-                sum = MUL_Z_NEGZ(sum);
-            }
-            sum.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-        }
-        return sum;
+	if (((first.pos == 1) && (second.pos == 1)) || ((first.pos == 0) && (second.pos == 0)))
+	{
+		sum.A = ADD_NN_N(first.A, second.A);
+		if (first.pos == 0 || (second.pos == 0))
+			sum.pos = 0;
+		else
+			sum.pos = 1;
+	}
+	else
+	{
+		if (COM_NN_D(first.A, second.A))
+		{
+			sum.A = SUB_NN_N(first.A, second.A);
+			if (first.pos == 0)
+				sum.pos = 0;
+			else
+				sum.pos = 1;
+		}
+		else
+		{
+			sum.A = SUB_NN_N(second.A, first.A);
+			if (second.pos == 0)
+				sum.pos = 0;
+			else
+				sum.pos = 1;
+		}
+	}
+	return sum;
 }
 
 Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ öåëûõ.
