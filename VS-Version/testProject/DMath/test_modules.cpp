@@ -1,7 +1,17 @@
 ﻿#include "test_modules.h"
 #include <vector>
-
 using namespace std;
+
+Ratio zeroRat(Ratio num)
+{
+	num.num.A.A.resize(1);
+	num.num.A.A[0] = 0;
+	num.denum.A.resize(1);
+	num.denum.A[0] = 1;
+	num.num.pos = 1;
+
+	return num;
+}
 // Начало модуля для натуральных чисел
 bool COM_NN_D(Natural First, Natural Second)//Ñðàâíèâàåò äâà ÷èñëà. Âîçâðàùàåò 1,
 {											// åñëè ïåðâîå áîëüøå èëè ðàâíî âòîðîìó. 0 - åñëè ìåíüøå.
@@ -211,7 +221,7 @@ Natural DIV_NN_N(Natural delimoe, Natural delitel) //Íàõîäèò íåïîëí
 		{
 			chastnoe = ADD_NN_N(chastnoe, DIV_NN_Dk(delimoe, delitel));
 			delimoe = SUB_NN_N(delimoe, MUL_NN_N(delitel, DIV_NN_Dk(delimoe, delitel)));
-		} while (!COM_NN_D(delitel, delimoe));
+		} while (COM_NN_D(delimoe, delitel));
 		return chastnoe;
 	}
 }
@@ -241,296 +251,460 @@ Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÊ äâó
 {
 	return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
 }
-// Конец модуля для натуральных чисел
+ //Конец модуля для натуральных чисел
 //---------------------------------------------------------------------------------------------------------
-// начало модуля для целых чисел
+ //начало модуля для целых чисел
 
-//int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
-//{
-//	if (!num.pos)
-//		return -1;
-//	else if (NZER_N_B(num.A))
-//		return 1;
-//	return 0;
-//}
-//
-//Natural ABS_Z_N(Integer num) //Ìîäóëü.
-//{
-//	return num.A;
-//}
-//
-//Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
-//{
-//	num.pos = !num.pos;
-//	return num;
-//}
-//
-//Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öåëûõ.
-//{
-//	Integer sum;
-//	if (POZ_Z_D(first) <= 0)
-//		if (POZ_Z_D(second) <= 0) {
-//			sum.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-//			sum = MUL_Z_NEGZ(sum);
-//		}
-//		else {
-//			if (ABS_Z_N(first) > ABS_Z_N(second)) {
-//				sum = MUL_Z_NEGZ(sum);
-//			}
-//			sum.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
-//		}
-//	else
-//		if (POZ_Z_D(second) >= 0)
-//			sum.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-//		else {
-//			if (ABS_Z_N(second) > ABS_Z_N(first)) {
-//				sum = MUL_Z_NEGZ(sum);
-//			}
-//			sum.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-//		}
-//		return sum;
-//}
-//
-//Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ öåëûõ.
-//{
-//	Integer sub;
-//	sub.pos = 1;
-//	if (POZ_Z_D(first) <= 0)
-//		if (POZ_Z_D(second) <= 0) {
-//			if (ABS_Z_N(first) > ABS_Z_N(second)) {
-//				sum = MUL_Z_NEGZ(sum);
-//			}
-//			sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
-//		}
-//		else {
-//			sub.A = ADD_ZZ_Z(first, second);
-//			sum = MUL_Z_NEGZ(sum);
-//		}
-//	else {
-//		if (POZ_Z_D(second) >= 0) {
-//			if (ABS_Z_N(second) > ABS_Z_N(first)) {
-//				sum = MUL_Z_NEGZ(sum);
-//			}
-//			sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-//		}
-//		else
-//			sub.A = ADD_ZZ_Z(first, second);
-//	}
-//	return sub;
-//}
-//
-//Integer MOD_ZZ_Z(Integer first, Integer second)
-//{
-//	Integer result;
-//	result.pos = 1;
-//	if (NZER_N_B(second.A)) //If divisor is not equal to 0
-//	{
-//		result.A = MOD_NN_N(first.A, second.A);
-//		if ((POZ_Z_D(first) < 0)) //If dividend is negative
-//			result.A = SUB_ZZ_Z(second.A, result.A); // If a < 0 then a mod b = |a|- (|a| mod |b|)
-//		return result;
-//	}
-//	else //If divisor is equal to 0
-//		throw invalid_argument("Divided by 0");
-//};
-//
-//void DIV_ZZ_Z(Natural first, Natural second) //Частное от деления большего натурального числа на меньшее 
-//											 //или равное натуральное с остатком (делитель отличен от нуля)
-//{
-//	Natural quotient = 0; // частное
-//	if (first > second && second != 0) // если первое число больше второго и делитель не равен 0
-//	{
-//		while (first >= second) // пока делимое >= делителя вычитаем их друг из друга и считаем частное 
-//		{
-//			first -= second;
-//			quotient++;
-//		}
-//		cout << quotient << endl; // выводим частное
-//	}
-//	else
-//	{
-//		if (first < second && first != 0) // если второе число больше первого и делитель не равен 0
-//		{
-//			while (b >= first) // пока делимое >= делителя вычитаем их друг из друга и считаем частное 
-//			{
-//				second -= first;
-//				quotient++;
-//			}
-//			cout << quotient << endl; // выводим частное
-//		}
-//		else
-//		{
-//			if (first = second && first != 0) // если первое число равно второму и они не нули, то частное равно 1
-//			{
-//				quotient = 1;
-//				cout << quotient << endl; // выводим частное
-//			}
-//			else
-//				cout << "Error" << endl; // делитель =0 или два числа равны 0
-//		}
-//	}
-//}
-//
-//// конец модуля для целых чисел
+int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
+{
+	if (!num.pos)
+		return -1;
+	else if (NZER_N_B(num.A))
+		return 1;
+	return 0;
+}
+
+Integer TRANS_N_Z(Natural num)
+{
+	Integer newNum;
+	newNum.A = num;
+	return newNum;
+}
+
+Natural TRANS_Z_N(Integer num)
+{
+	return num.A;
+}
+
+Natural ABS_Z_N(Integer num) //??????.
+{
+	return num.A;
+}
+
+Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
+{
+	num.pos = !num.pos;
+	return num;
+}
+
+Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öåëûõ.
+{
+	Integer sum;
+
+	if (((first.pos == 1) && (second.pos == 1)) || ((first.pos == 0) && (second.pos == 0)))
+	{
+		sum.A = ADD_NN_N(first.A, second.A);
+		if (first.pos == 0 || (second.pos == 0))
+			sum.pos = 0;
+		else
+			sum.pos = 1;
+	}
+	else
+	{
+		if (COM_NN_D(first.A, second.A))
+		{
+			sum.A = SUB_NN_N(first.A, second.A);
+			if (first.pos == 0)
+				sum.pos = 0;
+			else
+				sum.pos = 1;
+		}
+		else
+		{
+			sum.A = SUB_NN_N(second.A, first.A);
+			if (second.pos == 0)
+				sum.pos = 0;
+			else
+				sum.pos = 1;
+		}
+	}
+	return sum;
+}
+
+Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ öåëûõ.
+{
+	Integer sub;
+
+	if (POZ_Z_D(first) <= 0)
+		if (POZ_Z_D(second) <= 0)
+			if (COM_NN_D(first.A, second.A))
+			{
+				sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+				sub = MUL_Z_NEGZ(sub);
+			}
+			else
+				sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+		else {
+			sub.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+			sub = MUL_Z_NEGZ(sub);
+		}
+	else {
+		if (POZ_Z_D(second) >= 0) {
+			if (!COM_NN_D(first.A, second.A)) {
+				sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+				sub = MUL_Z_NEGZ(sub);
+			}
+			else
+				sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+		}
+		else
+			sub.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+	}
+	return sub;
+}
+
+Integer MUL_ZZ_Z(Integer first, Integer second) {
+	Integer mul;
+	mul.A = MUL_NN_N(first.A, second.A);
+
+	if (POZ_Z_D(first) == -1)
+		MUL_Z_NEGZ(mul);
+	if (POZ_Z_D(second) == -1)
+		MUL_Z_NEGZ(mul);
+
+	return mul;
+}
+
+Integer MOD_ZZ_Z(Integer first, Natural second)
+{
+	Integer result;
+
+	result.A = MOD_NN_N(first.A, second);
+
+	return result;
+};
+
+Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее
+												//или равное натуральное с остатком (делитель отличен от нуля)
+{
+	Integer div;
+
+	div.A = DIV_NN_N(first.A, second);
+
+	if (POZ_Z_D(first) < 0)
+		div.pos = 0;
+
+	return div;
+}
+
+// конец модуля для целых чисел
 ////---------------------------------------------------------------------------------------------------------
 //// Начало модуля для рациональных чисел(дробей)
-//
-//Ratio ADD_QQ_Q(Ratio A, Ratio B)
-//{
-//	Ratio C;
-//	Natural temp = LCM_NN_N(A.denum, B.denum); // Ïîèñê ÍÎÊ
-//	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
-//	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
-//	C.num = ADD_ZZ_Z(A.num, B.num);
-//	C.denum = temp;
-//	return C;
-//}
-//
-//Integer TRAN_Q_Z(Ratio b) // Ïðåîáðàçîâàíèå äðîáíîãî â öåëîå (Åñëè çíàìåíàòåëü ðàâåí 1)
-//						  // Ïåðåä âûçîâîì ñëåäóåò óáåäèòüñÿ, ÷òî çíàìåíàòåëü ðàâåí åäèíèöå
-//{
-//	return(b.num); // Ãîñïîæè, êàê æå ýòî ñëîæíî áûëî
-//}
-//
-//Ratio TRAN_Z_Q(Integer A)
-//{
-//	Ratio B; //äðîáü, êîòîðóþ âîçâðàùàåò ôóíêöèÿ
-//	B.num = A; //÷èñëî À â ÷èñëèòåëü
-//	B.denum.A.push_back(1); //â çíàìåíàòåëü ñòàâèì 1
-//	return B;
-//}
-//
-//Ratio RED_Q_Q(Ratio A) // Ôóíêöèÿ ñîêðàùåíèÿ äðîáè
-//{
-//	Natural B = GCF_NN_N(A.num.A, A.denum); // Íàõîäèì ÍÎÄ îò |÷èñëèòåëÿ| è çíàìåíàòåëÿ
-//	A.num.A = DIV_ZZ_Z(A.num.A, B); // Äåëèì ÷èñëèòåëü íà ÍÎÄ
-//	A.denum = DIV_ZZ_Z(A.denum, B); // Äåëèì çíàìåíàòåëü íà ÍÎÄ
-//	return A;
-//}
-//
-//bool INT_Q_Z(Ratio R)
-//{
-//	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Åñëè ðàçìåð çíàìåíàòåëÿ è ïåðâûé åãî ýëåìåíò ðàâíû 1 - ôóíêöèÿ âîçâðàùàåò 1, èíà÷å - 0
-//}
+Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей
+{
+	Ratio C;
+	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	C.num = ADD_ZZ_Z(A.num, B.num);
+	C.denum = temp;
+	return C;
+}
+
+Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
+						  // Перед вызовом следует убедиться, что знаменатель равен единице
+{
+	return(b.num);
+}
+
+Ratio TRAN_Z_Q(Integer A) // Преобразование целого в дробное
+{
+	Ratio B;//дробь, которую возвращает функция
+	B.num = A; //число А в числитель
+	B.denum.A.push_back(1); //в знаменатель ставим 1
+	return B;
+}
+
+
+
+bool INT_Q_Z(Ratio R)//Проверка на целое, если рациональное число является целым, то «да», иначе «нет»
+{
+	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
+}
+Ratio MUL_QQ_Q(Ratio A, Ratio B) //умножение дробных чисел
+{
+	A.num = MUL_ZZ_Z(A.num, B.num);    // перемножение числителей
+	A.denum = MUL_NN_N(A.denum, B.denum); // перемножение знаменателей 
+	return RED_Q_Q(A);                   // возвращается сокращенная дробь
+}
+
+Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей
+{
+	Ratio C;
+	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	C.num = SUB_ZZ_Z(A.num, B.num);
+	C.denum = temp;
+	return C;
+}
+
+Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
+{
+	Natural B = GCF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
+	A.num.A = DIV_NN_N(A.num.A, B); // Делим числитель на НОД
+	A.denum = DIV_NN_N(A.denum, B); // Делим знаменатель на НОД
+	return A;
+}
+Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел
+{
+	Ratio C;
+	Integer G;
+	G.A = B.denum;
+	G.pos = 0;
+	C.num = MUL_ZZ_Z(A.num, G);
+	C.denum = MUL_NN_N(A.denum, B.num.A);
+		if (B.num.pos == 1)
+			if (C.num.pos == 1)
+				C.num.pos = 0;
+			else
+				C.num.pos = 1;
+	return RED_Q_Q(C);
+}
 //// конец модуля для рациональных чисел(дробей)
 ////---------------------------------------------------------------------------------------------------------
 ////Модуль для многочленов
-//Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен на x^k
-//{
-//	M.n = M.n + k; //увеличила степень
-//	M.C.resize(M.n + 1); //Выделяем память
-//	for (int i(M.n), j(k); j>0; i--, j--)
-//		M.C[i] = M.C[i - k];
-//	for (int i = 0; i < k; i++)
-//		M.C[i].num.A.A[0] = 0;
-//	return M;
-//}
-//
-//Ratio LED_P_Z(Polynomial B) //возвращает старший коэффициент многочлена
-//{
-//	return B.C[B.n];
-//}
-//
-//int DEG_P_N(Polynomial B) // возвращает степень многочлена
-//{
-//	return B.n;
-//}
-//
-//Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает частное от деления divident на denominator
-//{
-//	int k(0);
-//	Polynomial quotient; // Частное
-//	quotient.n = dividend.n - denominator.n; //Степень частного
-//	quotient.C.resize(quotient.n + 1);
-//	Polynomial temp;
-//	while (dividend.n >= denominator.n);
-//	{
-//		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
-//		temp = MULL_PP_P(denominator, )
-//
-//	}
-//
-//	return quotient;
-//
-//
-//
-//}
-//
-//Polynomial DER_P_P(Polynomial B)
-//{
-//	Ratio one;
-//	one.num.A.A.resize(1);
-//	one.num.A.A[0] = 1;
-//	one.denum.A.resize(1);
-//	one.denum.A[0] = 1;
-//
-//	Ratio temp1;
-//	Ratio temp2;
-//
-//
-//	Ratio degree;
-//	int temp = B.n;
-//	int k(0);
-//	while (temp > 0)
-//	{
-//		degree.num.A.A.resize(degree.num.A.A.size() + 1);
-//		degree.num.A.A[k] = temp % 10;
-//		temp /= 10;
-//		k++;
-//	}
-//	degree.denum.A.resize(1);
-//	degree.denum.A[0] = 1;
-//	B.C[0].num.A.A[0] = 0;
-//	k = 0;
-//	for (int i = 1;i <= B.n;++i)
-//	{
-//		int temp = i;
-//		while (i > 0)
-//		{
-//			temp1.num.A.A.resize(temp1.num.A.A.size() + 1);
-//			temp1.num.A.A[k] = temp % 10;
-//			temp /= 10;
-//			k++;
-//		}
-//		temp1.denum.A.resize(1);
-//		temp1.denum.A[0] = 1;
-//
-//		temp2 = SUB_QQ_Q(degree, one);
-//		temp2 = SUB_QQ_Q(temp, temp1);
-//		B.C[i] = MULL_QQ_Q(B.C[i], temp2);
-//
-//	}
-//	B.n -= 1;
-//
-//}
-//
-//Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен на x^k
-//{
-//	M.n = M.n + k; //увеличила степень
-//	M.C.resize(M.n + 1); //Выделяем память
-//	for (int i(M.n), j(k); j>0; i--, j--)
-//		M.C[i] = M.C[i - k];
-//	for (int i = 0; i < k; i++)
-//		M.C[i].num.A.A[0] = 0;
-//	return M;
-//}
-//
-//
-//Polynomial MUL_PP_P(Polynomial M, Polynomial N)
-//{
-//	Polynomial B;
-//	if (M.n > N.n)
-//		B.C.resize(M.C.size());
-//	else
-//		B.C.resize(N.C.size());
-//	B.n = M.n + N.n;
-//	for (int i = 0; i <= B.n; i++)
-//	{
-//		for (int j = 0; j <= i; j++)
-//			B.C[i] = ADD_QQ_Q(B.C[i], MUL_QQ_Q(M.C[j], N.C[i - j]));
-//	}
-//
-//	return B;
-//}
+Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен на x^k
+{
+	M.n = M.n + k; //увеличила степень
+	M.C.resize(M.n + 1); //Выделяем память
+	for (int i(M.n), j(k); j>0; i--, j--)
+		M.C[i] = M.C[i - k];
+	for (int i = 0; i < k; i++)
+		M.C[i].num.A.A[0] = 0;
+	return M;
+}
+
+Ratio LED_P_Z(Polynomial B) //возвращает старший коэффициент многочлена
+{
+	return B.C[B.n];
+}
+
+int DEG_P_N(Polynomial B) // возвращает степень многочлена
+{
+	return B.n;
+}
+
+Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает частное от деления divident на denominator
+{
+	int k(0);
+	Polynomial quotient; // Частное
+	quotient.n = dividend.n - denominator.n; //Степень частного
+	quotient.C.resize(quotient.n + 1);
+	Polynomial temp;
+	Polynomial tempPol;
+	while (dividend.n >= denominator.n);
+	{
+		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
+		for (int i(quotient.n-k); i >= 0; i--)
+		{
+			tempPol.C[i] = quotient.C[i];
+		}
+		temp = MUL_PP_P(denominator, tempPol);
+		dividend = (SUB_PP_P(dividend, temp));
+
+	}
+
+	return quotient;
+
+
+
+}
+
+Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает остаток от деления divident на denominator
+{
+	int k(0);
+	Polynomial quotient; // Частное
+	quotient.n = dividend.n - denominator.n; //Степень частного
+	quotient.C.resize(quotient.n + 1);
+	Polynomial temp;
+	Polynomial tempPol;
+	while (dividend.n >= denominator.n);
+	{
+		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
+		for (int i(quotient.n - k); i >= 0; i--)
+		{
+			tempPol.C[i] = quotient.C[i];
+		}
+		temp = MUL_PP_P(denominator, tempPol);
+		dividend = (SUB_PP_P(dividend, temp));
+
+	}
+
+	return dividend;
+
+
+
+}
+
+Polynomial DER_P_P(Polynomial B)
+{
+	Integer oneInt;
+	oneInt.A.A.resize(1);
+	oneInt.A.A[0] = 1;
+	oneInt.pos = 1;
+	Ratio ratOne = TRAN_Z_Q(oneInt);
+	Polynomial res;
+	res.C.resize(B.C.size() - 1);
+	res.n = B.n - 1;
+	for (int i(0); i <= res.n; i++)
+	{
+		res.C[i] = MUL_QQ_Q(B.C[i + 1], ratOne);
+		ratOne = ADD_QQ_Q(ratOne, ratOne);
+	}
+	return res;
+}
+
+
+
+Polynomial MUL_PP_P(Polynomial first, Polynomial second) //Умножение многочленов
+{
+	Polynomial res;
+	res.n = first.n + second.n;
+	res.C.resize(res.n + 1);
+	Ratio null;
+	null = zeroRat(null);
+	if (first.n > second.n)
+	{
+		second.C.resize(first.C.size());
+		for (int i(second.n + 1); i < second.C.size(); i++)
+			second.C[i] = null;
+	
+	}
+	else
+	{
+		first.C.resize(second.C.size());
+		for (int i(first.n + 1); i < first.C.size(); i++)
+			first.C[i] = null;
+	}
+
+	for (int i(0); i <= res.n; i++)
+		res.C[i] = null;
+	for (int i(0); i <= res.n; i++)
+		for (int j(0); j <= i; j++)
+			res.C[i] = ADD_QQ_Q(res.C[i], MUL_QQ_Q(first.C[j], second.C[i - j]));
+	return res;
+}
+
+Polynomial ADD_PP_P(Polynomial first, Polynomial second) // складывает многочлены
+{
+	Polynomial res;
+	if (first.n >= second.n)
+	{
+		res.n = first.n;
+		res.C.resize(res.n + 1);
+		for (int i(0); i <= second.n; i++)
+			res.C[i] = ADD_QQ_Q(first.C[i], second.C[i]);
+		for (int i(second.n + 1); i <= first.n; i++)
+			res.C[i] = first.C[i];
+	}
+	else
+	{
+		res.n = second.n;
+		res.C.resize(res.n + 1);
+		for (int i(0); i <= first.n; i++)
+			res.C[i] = ADD_QQ_Q(first.C[i], second.C[i]);
+		for (int i(first.n + 1); i <= second.n; i++)
+			res.C[i] = second.C[i];
+	}
+	for (int i(res.n); i >= 0; i--)
+	{
+		if (res.C[i].num.A.A[0] == 0)
+		{
+			res.C.resize(res.n);
+			res.n--;
+		}
+		else
+			break;
+	}
+	return res;
+}
+
+Polynomial SUB_PP_P(Polynomial first, Polynomial second) // вычитает многочлены
+{
+	Polynomial res;
+	if (first.n >= second.n)
+	{
+		res.n = first.n;
+		res.C.resize(res.n + 1);
+		for (int i(0); i <= second.n; i++)
+			res.C[i] = SUB_QQ_Q(first.C[i], second.C[i]);
+		for (int i(second.n + 1); i <= first.n; i++)
+			res.C[i] = first.C[i];
+	}
+	else
+	{
+		res.n = second.n;
+		res.C.resize(res.n + 1);
+		for (int i(0); i <= first.n; i++)
+			res.C[i] = SUB_QQ_Q(first.C[i], second.C[i]);
+		for (int i(first.n + 1); i <= second.n; i++)
+			res.C[i] = second.C[i];
+	}
+	for (int i(res.n); i >= 0; i--)
+	{
+		if (res.C[i].num.A.A[0] == 0)
+		{
+			res.C.resize(res.n);
+			res.n--;
+		}
+		else
+			break;
+	}
+	return res;
+}
+
+Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number) //Умножение многочлена на рациональное число
+{
+	for (unsigned int i = 0; i <= chlen.n; i++)
+	{
+		chlen.C[i] = MUL_QQ_Q(chlen.C[i], ratio_number);
+	}
+	return chlen;
+}
+
+Polynomial FAC_P_PQ(Polynomial P) //Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
+{
+
+	Natural nok = P.C[0].denum;
+	for (int i = 1; i < P.n + 1; i++)
+		nok = LCM_NN_N(nok, P.C[i].denum);
+
+	Natural nod = ABS_Z_N(P.C[0].num);
+	for (int i = 1; i < P.n + 1; i++)
+		nod = GCF_NN_N(nod, ABS_Z_N(P.C[i].num));
+
+	for (int i = 0; i < P.n + 1; i++)
+		P.C[i].num = DIV_ZZ_Z(P.C[i].num, nod);
+
+	for (int i = 0; i < P.n + 1; i++)
+		P.C[i].denum = DIV_NN_N(P.C[i].denum, nok);
+
+	return P;
+}
+
+Polynomial GCF_PP_P(Polynomial PA, Polynomial PB) //НОД Многочлена
+{
+	if (PA.n < PB.n)
+		return GCF_PP_P(PB, PA);
+
+	while (PA.n != 0)
+	{
+		PA = MOV_PP_P(PA, PB);
+		Polynomial T = PA;
+		PA = PB;
+		PB = T;
+	}
+
+	return PB;
+}
+
+Polynomial NMR_P_P(Polynomial chlen) //Преобразование многочлена — кратные корни в простые
+{
+
+	return DIV_PP_P(chlen, GCF_PP_P(DER_P_P(chlen), chlen));
+	
+}
+
 //// конец модуля для многочленов
 ////---------------------------------------------------------------------------------------------------------

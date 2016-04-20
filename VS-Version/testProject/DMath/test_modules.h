@@ -48,29 +48,45 @@ Natural LCM_NN_N(Natural chislo1, Natural chislo2);//Находит НОК двух чисел
 												   // Конец модуля для натуральных
 //---------------------------------------------------------------------------------------------------------
 												   // Модуль для целых
-int POZ_Z_D(Integer num); //Определение знака целого числа, сигнатура.
 Natural ABS_Z_N(Integer num); //Модуль целого.
+int POZ_Z_D(Integer num); //Определение знака целого числа,1-положительное, 0 - равно 0, -1 - отрицательное.
 Integer MUL_Z_NEGZ(Integer num); //Умножение целого на -1.
-Integer ADD_ZZ_Z(Integer first, Integer second); //Сложение двух целых.
+Integer TRANS_N_Z(Natural num); //Натуральное в целое
+Natural TRANS_Z_N(Integer num);//Целое в натуральное
+Integer ADD_ZZ_Z(Integer first, Integer second); //Сложение двух целых
 Integer SUB_ZZ_Z(Integer first, Integer second); //Вычитание двух целых.
+Integer MUL_ZZ_Z(Integer first, Integer second); //Умножение целых чисел
+Integer DIV_ZZ_Z(Integer first, Natural second); //Частное от деления большего целого числа на меньшее 
+Integer MOD_ZZ_Z(Integer first, Natural second); //Остаток от деление 
+
 
 												 // Конец модуля для целых
 //---------------------------------------------------------------------------------------------------------
 												 // Модуль для дробей
-Ratio ADD_QQ_Q(Ratio A, Ratio B); // Функция сложения двух рациональных чисел
-Ratio TRAN_Z_Q(Integer A); // Функция, которая преобразует целое в дробное(со знаменателем = 1)
 Ratio RED_Q_Q(Ratio A); // Функция сокращения дроби
-Integer TRAN_Q_Z(Ratio b); // Преобразование дробного в целое
 bool INT_Q_Z(Ratio R); // Если рациональное число - целое, то 1, иначе 0
+Ratio TRAN_Z_Q(Integer A); // Функция, которая преобразует целое в дробное(со знаменателем = 1)
+Integer TRAN_Q_Z(Ratio b); // Преобразование дробного в целое
+Ratio ADD_QQ_Q(Ratio A, Ratio B); // Функция сложения двух рациональных чисел
+Ratio SUB_QQ_Q(Ratio A, Ratio B); //Вычитание дробей
+Ratio MUL_QQ_Q(Ratio A, Ratio B); //умножение дробных чисел
+Ratio DIV_QQ_Q(Ratio A, Ratio B); //деление дробных чисел
+
 
 					   // Конец модуля для дробей
 //---------------------------------------------------------------------------------------------------------
 					   // Модуль для многочленов
+Polynomial ADD_PP_P(Polynomial first, Polynomial second); // складывает многочлены
+Polynomial SUB_PP_P(Polynomial first, Polynomial second); // вычитает многочлены
+Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number); //Умножение многочлена на рациональное число
 Polynomial MUL_Pxk_P(Polynomial M, int k); //умножает многочлен на x^k
 Ratio LED_P_Z(Polynomial B); //возвращает старший коэффициент многочлена
 int DEG_P_N(Polynomial B); //возвращает степень многочлена
-Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator);
-Polynomial DER_P_P(Polynomial B);
-Polynomial MUL_Pxk_P(Polynomial M, int k);
-Polynomial MUL_PP_P(Polynomial M, Polynomial N);
+Polynomial FAC_P_PQ(Polynomial P); //Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
+Polynomial MUL_PP_P(Polynomial M, Polynomial N); //Умножение многочленов
+Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator); // возвращает частное от деления divident на denominator
+Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator); // возвращает остаток от деления divident на denominator
+Polynomial GCF_PP_P(Polynomial PA, Polynomial PB); //НОД многочленов
+Polynomial DER_P_P(Polynomial B); //Производная
+Polynomial NMR_P_P(Polynomial chlen); //Преобразование многочлена — кратные корни в простые
 						   // Конец модуля для многочленов

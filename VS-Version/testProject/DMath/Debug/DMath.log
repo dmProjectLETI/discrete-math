@@ -1,12 +1,29 @@
 ﻿  test_modules.cpp
-e:\anton\programming\dmath\dmath\test_modules.cpp(44): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(83): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(89): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(117): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(146): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(169): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(185): warning C4018: <: несоответствие типов со знаком и без знака
-e:\anton\programming\dmath\dmath\test_modules.cpp(35): warning C4715: COM_NN_D: значение возвращается не при всех путях выполнения
+e:\anton\programming\dmath\dmath\test_modules.cpp(54): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(93): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(99): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(114): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(127): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(156): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(179): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(195): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(550): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(570): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(577): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(581): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(583): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(596): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(598): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(605): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(607): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(630): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(632): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(639): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(641): warning C4018: <=: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(670): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(674): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(677): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(680): warning C4018: <: несоответствие типов со знаком и без знака
+e:\anton\programming\dmath\dmath\test_modules.cpp(45): warning C4715: COM_NN_D: значение возвращается не при всех путях выполнения
   DMath.vcxproj -> E:\Anton\Programming\DMath\Debug\DMath.exe
   DMath.vcxproj -> E:\Anton\Programming\DMath\Debug\DMath.pdb (Partial PDB)
