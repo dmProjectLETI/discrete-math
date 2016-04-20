@@ -244,8 +244,8 @@ Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÊ äâó
 //---------------------------------------------------------------------------------------------------------
  //начало модуля для целых чисел
 
-int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
-{
+int POZ_Z_D(Integer num) //Сигнатура, определение знака целого числа.	
+{			 //Выполнил Предтеченский Дмитрий.
 	if (!num.pos)
 		return -1;
 	else if (NZER_N_B(num.A))
@@ -253,31 +253,31 @@ int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
 	return 0;
 }
 
-Integer TRANS_N_Z(Natural num)
-{
+Integer TRANS_N_Z(Natural num) //Преобразование натурального числа в целое число.
+{			       //Выполнил Предтеченский Дмитрий.	
 	Integer newNum;
 	newNum.A = num;
 	return newNum;
 }
 
-Natural TRANS_Z_N(Integer num)
-{
+Natural TRANS_Z_N(Integer num) //Преобразование целого положительного числа в натуральное число.
+{			       //Выполнил Предтеченский Дмитрий.	
 	return num.A;
 }
 
-Natural ABS_Z_N(Integer num) //??????.
-{
+Natural ABS_Z_N(Integer num) //Модуль целого числа.
+{			     //Выполнил Предтеченский Дмитрий.
 	return num.A;
 }
 
-Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
-{
+Integer MUL_Z_NEGZ(Integer num) //Умножение целого числа на -1
+{				//Выполнил Предтеченский Дмитрий.
 	num.pos = !num.pos;
 	return num;
 }
 
-Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öåëûõ.
-{
+Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий.
 	Integer sum;
 
 	if (((first.pos == 1) && (second.pos == 1)) || ((first.pos == 0) && (second.pos == 0)))
@@ -310,8 +310,8 @@ Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öå
 	return sum;
 }
 
-Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ öåëûõ.
-{
+Integer SUB_ZZ_Z(Integer first, Integer second) //Вычитание двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий.
 	Integer sub;
 
 	if (POZ_Z_D(first) <= 0)
@@ -342,7 +342,8 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ ö
 	return sub;
 }
 
-Integer MUL_ZZ_Z(Integer first, Integer second) {
+Integer MUL_ZZ_Z(Integer first, Integer second) //Умножение двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий.
 	Integer mul;
 	mul.A = MUL_NN_N(first.A, second.A);
 
@@ -354,8 +355,8 @@ Integer MUL_ZZ_Z(Integer first, Integer second) {
 	return mul;
 }
 
-Integer MOD_ZZ_Z(Integer first, Natural second)
-{
+Integer MOD_ZZ_Z(Integer first, Natural second) //Остаток от деления целого числа на целое число. 
+{						//Выполнила Чаркова Дарья.
 	Integer result;
 
 	result.A = MOD_NN_N(first.A, second);
@@ -363,9 +364,9 @@ Integer MOD_ZZ_Z(Integer first, Natural second)
 	return result;
 };
 
-Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее
-												//или равное натуральное с остатком (делитель отличен от нуля)
-{
+Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее 
+						//или равное натуральное число с остатком (делитель отличен от нуля).
+{						//Выполнил Уразаев Евгений.
 	Integer div;
 
 	div.A = DIV_NN_N(first.A, second);
