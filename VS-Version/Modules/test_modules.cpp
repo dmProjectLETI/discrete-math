@@ -2,8 +2,8 @@
 #include <vector>
 using namespace std;
 // Начало модуля для натуральных чисел
-bool COM_NN_D(Natural First, Natural Second)//Ñðàâíèâàåò äâà ÷èñëà. Âîçâðàùàåò 1,
-{											// åñëè ïåðâîå áîëüøå èëè ðàâíî âòîðîìó. 0 - åñëè ìåíüøå.
+bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1, 
+{											// если первое больше или равно второму. 0 - если меньше.(Алексеева Анастасия 5372)
 	if (First.A.size() < Second.A.size())
 		return 0;
 	else
@@ -33,8 +33,8 @@ bool COM_NN_D(Natural First, Natural Second)//Ñðàâíèâàåò äâà ÷èñ
 	}
 }
 
-bool NZER_N_B(Natural chislo) //Ïðîâåðÿåò ÷èñëî íà íå ðàâåíñòâî íóëþ
-{							  //1- ÷èñëî ïîëîæèòåëüíîå, 0 - ÷èñëî ðàâíî 0
+bool NZER_N_B(Natural chislo) //Проверяет число на не равенство нулю
+{							  //1- число положительное, 0 - число равно 0 (Чачух Роман 5372)
 	if (chislo.A.empty())
 		return 0;
 	else
@@ -49,7 +49,7 @@ bool NZER_N_B(Natural chislo) //Ïðîâåðÿåò ÷èñëî íà íå ðàâå
 	}
 }
 
-Natural ADD_1N_N(Natural chislo) //Ïðèáàâëÿåò 1 ê ÷èñëó
+Natural ADD_1N_N(Natural chislo) //Прибавляет 1 к числу (Синельникова Яна 5372)
 {
 	int k = 1, i = 0;
 	do
@@ -73,7 +73,7 @@ Natural ADD_1N_N(Natural chislo) //Ïðèáàâëÿåò 1 ê ÷èñëó
 	return chislo;
 }
 
-Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Ñêëàäûâàåò äâà ÷èñëà
+Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Складывает два числа (Потапова Юлия 5372)
 {
 	if (!COM_NN_D(chislo1, chislo2))
 		chislo1.A.swap(chislo2.A);
@@ -97,9 +97,9 @@ Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Ñêëàäûâàåò äâà 
 	return Sum;
 };
 
-Natural SUB_NN_N(Natural First, Natural Second) //Âû÷èòàåò èç îäíîãî ÷èñëà äðóãîå. Ðàáîòàåò òîëüêî
-{												//äëÿ íåîòðèöàòåëüíûõ ðåçóëüòàòîâ, ïîýòîìó ïåðåä âûçîâîì ýòîé ôóíêöèè
-	int p = 0;									//íåîáõîäèìî óáåäèòüñÿ, ÷òî ïåðâîå ÷èñëî íå ìåíüøå âòîðîãî
+Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа другое. Работает только
+{												//для неотрицательных результатов, поэтому перед вызовом этой функции 
+	int p = 0;									//необходимо убедиться, что первое число не меньше второго (Кузина Дарья 5372)
 	for (int i = 0; i < Second.A.size(); ++i)
 	{
 		if (First.A[i] + 10 - Second.A[i] - p < 10)
@@ -138,7 +138,7 @@ Natural SUB_NN_N(Natural First, Natural Second) //Âû÷èòàåò èç îäíî
 	return First;
 }
 
-Natural MUL_ND_N(Natural ch, int cifra) //Óìíîæàåò ÷èñëî íà öèôðó
+Natural MUL_ND_N(Natural ch, int cifra) //Умножает число на цифру (Васильева Ольга 5372)
 {
 	int s = 0;
 	Natural chislo;
@@ -155,14 +155,14 @@ Natural MUL_ND_N(Natural ch, int cifra) //Óìíîæàåò ÷èñëî íà öè�
 	return chislo;
 }
 
-Natural MUL_Nk_N(Natural &Input, int k) //Óìíîæàåò ÷èñëî íà 10^k
+Natural MUL_Nk_N(Natural &Input, int k) //Умножает число на 10^k (Макаров Семен 5372)
 {
 	for (int i = 0; i < k; ++i)
 		Input.A.insert(Input.A.begin(), 0);
 	return Input;
 }
 
-Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Ïåðåìíîæàåò äâà ÷èñëà
+Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Перемножает два числа (Потапова Юлия 5372)
 {
 	Natural Proizved;
 	for (int i = 0; i < chislo2.A.size(); ++i)
@@ -172,13 +172,13 @@ Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Ïåðåìíîæàåò äâ
 	return Proizved;
 }
 
-Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Âû÷èòàåò èç ïåðâîãî ÷èñëà âòîðîå, óìíîæåííîå íà öèôðó
-{															//àíàëîãè÷íî âû÷èòàíèþ, ïåðåä âûçîâîì íåîáõîäèìî óáåäèòüñÿ,
-	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//÷òî ðåçóëüòàò âîçìîæåí, ò.å. íåîòðèöàòåëåí
+Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Вычитает из первого числа второе, умноженное на цифру
+{															//аналогично вычитанию, перед вызовом необходимо убедиться,
+	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//что результат возможен, т.е. неотрицателен (Волков Артем 5372)
 }
 
-Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Âû÷èñëÿåò ïåðâóþ öèôðó ÷àñòíîãî, óìíîæåííóþ íà 10^k,
-{													//ãäå k - ïîçèöèÿ ýòîé öèôðû â ÷àñòíîì
+Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру частного, умноженную на 10^k, 
+{													//где k - позиция этой цифры в частном (Моногошева Ирина 5372)
 	Natural chislo;
 	int j = (chislo1.A.size() - 1);
 	for (int i = 0; i < chislo2.A.size(); ++i, --j)
@@ -196,7 +196,7 @@ Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Âû÷èñëÿåò ïåðâ
 	return MUL_Nk_N(chislo, j);
 }
 
-Natural DIV_NN_N(Natural delimoe, Natural delitel) //Íàõîäèò íåïîëíîå ÷àñòíîå äâóõ ÷èñåë
+Natural DIV_NN_N(Natural delimoe, Natural delitel) //Находит неполное частное двух чисел (Козак Мария 5372)
 {
 	Natural chastnoe;
 	if (!COM_NN_D(delimoe, delitel))
@@ -215,12 +215,12 @@ Natural DIV_NN_N(Natural delimoe, Natural delitel) //Íàõîäèò íåïîëí
 	}
 }
 
-Natural MOD_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò îñòàòîê îò äåëåíèÿ ïåðâîãî ÷èñëà íà âòîðîå
+Natural MOD_NN_N(Natural chislo1, Natural chislo2)//Находит остаток от деления первого числа на второе (Лисицын Захар 5372)
 {
 	return SUB_NN_N(chislo1, MUL_NN_N(DIV_NN_N(chislo1, chislo2), chislo2));
 }
 
-Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÄ äâóõ ÷èñåë
+Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Находит НОД двух чисел (Кузина Дарья 5372)
 {
 	if (!COM_NN_D(chislo1, chislo2))
 		chislo1.A.swap(chislo2.A);
@@ -236,7 +236,7 @@ Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÄ äâó
 	return chislo2;
 }
 
-Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÊ äâóõ ÷èñåë
+Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Находит НОК двух чисел (Кузина Дарья 5372)
 {
 	return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
 }
