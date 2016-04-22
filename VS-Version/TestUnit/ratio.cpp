@@ -51,10 +51,13 @@ Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей
 
 Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
 {
-    Natural B = GCF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
-    A.num.A = DIV_NN_N(A.num.A, B); // Делим числитель на НОД
-    A.denum = DIV_NN_N(A.denum, B); // Делим знаменатель на НОД
-    return A;
+	if (POZ_Z_D(A.num))
+	{
+		Natural B = GCF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
+		A.num.A = DIV_NN_N(A.num.A, B); // Делим числитель на НОД
+		A.denum = DIV_NN_N(A.denum, B); // Делим знаменатель на НОД
+	}
+	return A;
 }
 Ratio DIV_QQ_Q (Ratio A, Ratio B) //деление дробных чисел
 {
