@@ -277,16 +277,14 @@ Integer MUL_Z_NEGZ(Integer num) //Умножение целого числа н�
 }
 
 Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух целых чисел.
-{						//Выполнил Предтеченский Дмитрий (5396).
+{						//Выполнили Предтеченский Дмитрий (5396) и Квятковский Антон (5395).
 	Integer sum;
 
 	if (((first.pos == 1) && (second.pos == 1)) || ((first.pos == 0) && (second.pos == 0)))
 	{
 		sum.A = ADD_NN_N(first.A, second.A);
 		if (first.pos == 0 || (second.pos == 0))
-			sum.pos = 0;
-		else
-			sum.pos = 1;
+			MUL_Z_NEGZ(sum);
 	}
 	else
 	{
@@ -294,17 +292,13 @@ Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух це
 		{
 			sum.A = SUB_NN_N(first.A, second.A);
 			if (first.pos == 0)
-				sum.pos = 0;
-			else
-				sum.pos = 1;
+				MUL_Z_NEGZ(sum);
 		}
 		else
 		{
 			sum.A = SUB_NN_N(second.A, first.A);
 			if (second.pos == 0)
-				sum.pos = 0;
-			else
-				sum.pos = 1;
+				MUL_Z_NEGZ(sum);
 		}
 	}
 	return sum;
