@@ -115,6 +115,7 @@ int main()
 		cout << "\"DmMath\"  - программа для работы с длинными числами." << endl;
 		cout << "Данная программа является тестовой демонстрацией работы алгоритмов над длинными числами" << endl;
 		cout << "Конечный вариант будет реализован с использованием Qt и представлен на защите" <<  endl << endl;
+		cout << "Выполнено студентами групп 5372, 5373, 5395, 5396" << endl;
 		cout << "Выберите модуль для работы: "  << endl;
 		cout << "1) Натуральное число" << endl;
 		cout << "2) Целое число" << endl;
@@ -128,7 +129,7 @@ int main()
 			Natural num;
 			Natural second;
 			system("cls");
-			cout << "Введите натуральное число" << endl;
+			cout << "Введите натуральное число (неотрицательное)" << endl;
 			num = natInput();
 			do
 			{
@@ -427,6 +428,7 @@ int main()
 			Ratio second;
 			system("cls");
 			cout << "Введите дробное число" << endl;
+			cout << "Числитель  - целое число, знаменатель натуральное" << endl;
 			num = ratInput();
 			do
 			{
@@ -523,11 +525,13 @@ int main()
 				system("pause");
 				system("cls");
 			} while (keyCode!=11);
+			break;
 		}
 		case 4:
 		{
 			Polynomial num;
 			Polynomial second;
+			cout << "Ввод коэффициентов многочлена начинается со свободного" << endl;
 			num = polInput();
 			system("cls");
 			do

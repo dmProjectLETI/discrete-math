@@ -88,5 +88,5 @@ Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator); // возвращает 
 Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator); // возвращает остаток от деления divident на denominator
 Polynomial GCF_PP_P(Polynomial PA, Polynomial PB); //НОД многочленов
 Polynomial DER_P_P(Polynomial B); //Производная
-Polynomial NMR_P_P(Polynomial chlen); //Преобразование многочлена — кратные корни в простые
+Polynomial NMR_P_P(Polynomial chlen); //Преобразоводание многочлена — кратные корни в простые
 						   // Конец модуля для многочленов

@@ -12,9 +12,18 @@ Ratio zeroRat(Ratio num)
 
 	return num;
 }
+Ratio oneRat(Ratio num)
+{
+	num.num.A.A.resize(1);
+	num.num.A.A[0] = 1;
+	num.denum.A.resize(1);
+	num.denum.A[0] = 1;
+	num.num.pos = 1;
+	return num;
+}
 // Начало модуля для натуральных чисел
-bool COM_NN_D(Natural First, Natural Second)//Ñðàâíèâàåò äâà ÷èñëà. Âîçâðàùàåò 1,
-{											// åñëè ïåðâîå áîëüøå èëè ðàâíî âòîðîìó. 0 - åñëè ìåíüøå.
+bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1, 
+{											// если первое больше или равно второму. 0 - если меньше.(Алексеева Анастасия 5372)
 	if (First.A.size() < Second.A.size())
 		return 0;
 	else
@@ -44,8 +53,8 @@ bool COM_NN_D(Natural First, Natural Second)//Ñðàâíèâàåò äâà ÷èñ
 	}
 }
 
-bool NZER_N_B(Natural chislo) //Ïðîâåðÿåò ÷èñëî íà íå ðàâåíñòâî íóëþ
-{							  //1- ÷èñëî ïîëîæèòåëüíîå, 0 - ÷èñëî ðàâíî 0
+bool NZER_N_B(Natural chislo) //Проверяет число на не равенство нулю
+{							  //1- число положительное, 0 - число равно 0 (Чачух Роман 5372)
 	if (chislo.A.empty())
 		return 0;
 	else
@@ -60,7 +69,7 @@ bool NZER_N_B(Natural chislo) //Ïðîâåðÿåò ÷èñëî íà íå ðàâå
 	}
 }
 
-Natural ADD_1N_N(Natural chislo) //Ïðèáàâëÿåò 1 ê ÷èñëó
+Natural ADD_1N_N(Natural chislo) //Прибавляет 1 к числу (Синельникова Яна 5372)
 {
 	int k = 1, i = 0;
 	do
@@ -84,7 +93,7 @@ Natural ADD_1N_N(Natural chislo) //Ïðèáàâëÿåò 1 ê ÷èñëó
 	return chislo;
 }
 
-Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Ñêëàäûâàåò äâà ÷èñëà
+Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Складывает два числа (Потапова Юлия 5372)
 {
 	if (!COM_NN_D(chislo1, chislo2))
 		chislo1.A.swap(chislo2.A);
@@ -108,9 +117,9 @@ Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Ñêëàäûâàåò äâà 
 	return Sum;
 };
 
-Natural SUB_NN_N(Natural First, Natural Second) //Âû÷èòàåò èç îäíîãî ÷èñëà äðóãîå. Ðàáîòàåò òîëüêî
-{												//äëÿ íåîòðèöàòåëüíûõ ðåçóëüòàòîâ, ïîýòîìó ïåðåä âûçîâîì ýòîé ôóíêöèè
-	int p = 0;									//íåîáõîäèìî óáåäèòüñÿ, ÷òî ïåðâîå ÷èñëî íå ìåíüøå âòîðîãî
+Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа другое. Работает только
+{												//для неотрицательных результатов, поэтому перед вызовом этой функции 
+	int p = 0;									//необходимо убедиться, что первое число не меньше второго (Кузина Дарья 5372)
 	for (int i = 0; i < Second.A.size(); ++i)
 	{
 		if (First.A[i] + 10 - Second.A[i] - p < 10)
@@ -149,7 +158,7 @@ Natural SUB_NN_N(Natural First, Natural Second) //Âû÷èòàåò èç îäíî
 	return First;
 }
 
-Natural MUL_ND_N(Natural ch, int cifra) //Óìíîæàåò ÷èñëî íà öèôðó
+Natural MUL_ND_N(Natural ch, int cifra) //Умножает число на цифру (Васильева Ольга 5372)
 {
 	int s = 0;
 	Natural chislo;
@@ -166,14 +175,14 @@ Natural MUL_ND_N(Natural ch, int cifra) //Óìíîæàåò ÷èñëî íà öè�
 	return chislo;
 }
 
-Natural MUL_Nk_N(Natural &Input, int k) //Óìíîæàåò ÷èñëî íà 10^k
+Natural MUL_Nk_N(Natural &Input, int k) //Умножает число на 10^k (Макаров Семен 5372)
 {
 	for (int i = 0; i < k; ++i)
 		Input.A.insert(Input.A.begin(), 0);
 	return Input;
 }
 
-Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Ïåðåìíîæàåò äâà ÷èñëà
+Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Перемножает два числа (Потапова Юлия 5372)
 {
 	Natural Proizved;
 	for (int i = 0; i < chislo2.A.size(); ++i)
@@ -183,13 +192,13 @@ Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Ïåðåìíîæàåò äâ
 	return Proizved;
 }
 
-Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Âû÷èòàåò èç ïåðâîãî ÷èñëà âòîðîå, óìíîæåííîå íà öèôðó
-{															//àíàëîãè÷íî âû÷èòàíèþ, ïåðåä âûçîâîì íåîáõîäèìî óáåäèòüñÿ,
-	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//÷òî ðåçóëüòàò âîçìîæåí, ò.å. íåîòðèöàòåëåí
+Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Вычитает из первого числа второе, умноженное на цифру
+{															//аналогично вычитанию, перед вызовом необходимо убедиться,
+	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//что результат возможен, т.е. неотрицателен (Волков Артем 5372)
 }
 
-Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Âû÷èñëÿåò ïåðâóþ öèôðó ÷àñòíîãî, óìíîæåííóþ íà 10^k,
-{													//ãäå k - ïîçèöèÿ ýòîé öèôðû â ÷àñòíîì
+Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру частного, умноженную на 10^k, 
+{													//где k - позиция этой цифры в частном (Моногошева Ирина 5372)
 	Natural chislo;
 	int j = (chislo1.A.size() - 1);
 	for (int i = 0; i < chislo2.A.size(); ++i, --j)
@@ -207,7 +216,7 @@ Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Âû÷èñëÿåò ïåðâ
 	return MUL_Nk_N(chislo, j);
 }
 
-Natural DIV_NN_N(Natural delimoe, Natural delitel) //Íàõîäèò íåïîëíîå ÷àñòíîå äâóõ ÷èñåë
+Natural DIV_NN_N(Natural delimoe, Natural delitel) //Находит неполное частное двух чисел (Козак Мария 5372)
 {
 	Natural chastnoe;
 	if (!COM_NN_D(delimoe, delitel))
@@ -226,12 +235,12 @@ Natural DIV_NN_N(Natural delimoe, Natural delitel) //Íàõîäèò íåïîëí
 	}
 }
 
-Natural MOD_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò îñòàòîê îò äåëåíèÿ ïåðâîãî ÷èñëà íà âòîðîå
+Natural MOD_NN_N(Natural chislo1, Natural chislo2)//Находит остаток от деления первого числа на второе (Лисицын Захар 5372)
 {
 	return SUB_NN_N(chislo1, MUL_NN_N(DIV_NN_N(chislo1, chislo2), chislo2));
 }
 
-Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÄ äâóõ ÷èñåë
+Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Находит НОД двух чисел (Кузина Дарья 5372)
 {
 	if (!COM_NN_D(chislo1, chislo2))
 		chislo1.A.swap(chislo2.A);
@@ -247,7 +256,7 @@ Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÄ äâó
 	return chislo2;
 }
 
-Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÊ äâóõ ÷èñåë
+Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Находит НОК двух чисел (Кузина Дарья 5372)
 {
 	return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
 }
@@ -255,8 +264,8 @@ Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Íàõîäèò ÍÎÊ äâó
 //---------------------------------------------------------------------------------------------------------
  //начало модуля для целых чисел
 
-int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
-{
+int POZ_Z_D(Integer num) //Сигнатура, определение знака целого числа.	
+{			 //Выполнил Предтеченский Дмитрий (5396).
 	if (!num.pos)
 		return -1;
 	else if (NZER_N_B(num.A))
@@ -264,31 +273,31 @@ int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
 	return 0;
 }
 
-Integer TRANS_N_Z(Natural num)
-{
+Integer TRANS_N_Z(Natural num) //Преобразование натурального числа в целое число.
+{			       //Выполнил Предтеченский Дмитрий (5396).	
 	Integer newNum;
 	newNum.A = num;
 	return newNum;
 }
 
-Natural TRANS_Z_N(Integer num)
-{
+Natural TRANS_Z_N(Integer num) //Преобразование целого положительного числа в натуральное число.
+{			       //Выполнил Предтеченский Дмитрий (5396).	
 	return num.A;
 }
 
-Natural ABS_Z_N(Integer num) //??????.
-{
+Natural ABS_Z_N(Integer num) //Модуль целого числа.
+{			     //Выполнил Предтеченский Дмитрий (5396).
 	return num.A;
 }
 
-Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
-{
+Integer MUL_Z_NEGZ(Integer num) //Умножение целого числа на -1
+{				//Выполнил Предтеченский Дмитрий (5396).
 	num.pos = !num.pos;
 	return num;
 }
 
-Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öåëûõ.
-{
+Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий (5396).
 	Integer sum;
 
 	if (((first.pos == 1) && (second.pos == 1)) || ((first.pos == 0) && (second.pos == 0)))
@@ -321,8 +330,8 @@ Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öå
 	return sum;
 }
 
-Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ öåëûõ.
-{
+Integer SUB_ZZ_Z(Integer first, Integer second) //Вычитание двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий (5396).
 	Integer sub;
 
 	if (POZ_Z_D(first) <= 0)
@@ -353,7 +362,8 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ ö
 	return sub;
 }
 
-Integer MUL_ZZ_Z(Integer first, Integer second) {
+Integer MUL_ZZ_Z(Integer first, Integer second) //Умножение двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий (5396).
 	Integer mul;
 	mul.A = MUL_NN_N(first.A, second.A);
 
@@ -365,8 +375,8 @@ Integer MUL_ZZ_Z(Integer first, Integer second) {
 	return mul;
 }
 
-Integer MOD_ZZ_Z(Integer first, Natural second)
-{
+Integer MOD_ZZ_Z(Integer first, Natural second) //Остаток от деления целого числа на целое число. 
+{						//Выполнила Чаркова Дарья (5396).
 	Integer result;
 
 	result.A = MOD_NN_N(first.A, second);
@@ -374,9 +384,9 @@ Integer MOD_ZZ_Z(Integer first, Natural second)
 	return result;
 };
 
-Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее
-												//или равное натуральное с остатком (делитель отличен от нуля)
-{
+Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее 
+												//или равное натуральное число с остатком (делитель отличен от нуля).
+{						//Выполнил Уразаев Евгений (5396).
 	Integer div;
 
 	div.A = DIV_NN_N(first.A, second);
@@ -390,7 +400,7 @@ Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от делен
 // конец модуля для целых чисел
 ////---------------------------------------------------------------------------------------------------------
 //// Начало модуля для рациональных чисел(дробей)
-Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей
+Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей (Калинин Максим/Константинова Ксения)
 {
 	Ratio C;
 	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
@@ -401,13 +411,13 @@ Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей
 	return C;
 }
 
-Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1)
+Integer TRAN_Q_Z(Ratio b) // Преобразование дробного в целое (Если знаменатель равен 1) (Хамец Максим/Константинова Ксения)
 						  // Перед вызовом следует убедиться, что знаменатель равен единице
 {
 	return(b.num);
 }
 
-Ratio TRAN_Z_Q(Integer A) // Преобразование целого в дробное
+Ratio TRAN_Z_Q(Integer A) // Преобразование целого в дробное (Хамец Максим/Филиппова Анастасия)
 {
 	Ratio B;//дробь, которую возвращает функция
 	B.num = A; //число А в числитель
@@ -417,18 +427,18 @@ Ratio TRAN_Z_Q(Integer A) // Преобразование целого в дро
 
 
 
-bool INT_Q_Z(Ratio R)//Проверка на целое, если рациональное число является целым, то «да», иначе «нет»
+bool INT_Q_Z(Ratio R)//Проверка на целое, если рациональное число является целым, то «да», иначе «нет» (Хамец Максим/Филиппова Анастасия)
 {
 	return  (R.denum.A.size() == 1 && R.denum.A[0] == 1) ? 1 : 0; //Если размер знаменателя и первый его элемент равны 1 - функция возвращает 1, иначе - 0
 }
-Ratio MUL_QQ_Q(Ratio A, Ratio B) //умножение дробных чисел
+Ratio MUL_QQ_Q(Ratio A, Ratio B) //умножение дробных чисел (Климанова Анастасия/Лавренов Андрей )
 {
 	A.num = MUL_ZZ_Z(A.num, B.num);    // перемножение числителей
 	A.denum = MUL_NN_N(A.denum, B.denum); // перемножение знаменателей 
 	return RED_Q_Q(A);                   // возвращается сокращенная дробь
 }
 
-Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей
+Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей (Айсабаев Закиржан)
 {
 	Ratio C;
 	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
@@ -439,14 +449,17 @@ Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей
 	return C;
 }
 
-Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби
+Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби (Шершаков Никита)
 {
-	Natural B = GCF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
-	A.num.A = DIV_NN_N(A.num.A, B); // Делим числитель на НОД
-	A.denum = DIV_NN_N(A.denum, B); // Делим знаменатель на НОД
+	if (POZ_Z_D(A.num))
+	{
+		Natural B = GCF_NN_N(A.num.A, A.denum); // Находим НОД от |числителя| и знаменателя
+		A.num.A = DIV_NN_N(A.num.A, B); // Делим числитель на НОД
+		A.denum = DIV_NN_N(A.denum, B); // Делим знаменатель на НОД
+	}
 	return A;
 }
-Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел
+Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел (Климанова Анастасия/Лавренов Андрей )
 {
 	Ratio C;
 	Integer G;
@@ -454,17 +467,18 @@ Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел
 	G.pos = 0;
 	C.num = MUL_ZZ_Z(A.num, G);
 	C.denum = MUL_NN_N(A.denum, B.num.A);
-		if (B.num.pos == 1)
-			if (C.num.pos == 1)
-				C.num.pos = 0;
-			else
-				C.num.pos = 1;
+	if (B.num.pos == 1)
+		if (C.num.pos == 1)
+			C.num.pos = 0;
+		else
+			C.num.pos = 1;
 	return RED_Q_Q(C);
 }
 //// конец модуля для рациональных чисел(дробей)
 ////---------------------------------------------------------------------------------------------------------
 ////Модуль для многочленов
-Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен на x^k
+//ОТВЕСТВЕННЫЕ  - ГРУППА 5395
+Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен на x^k, выполнила Гаврильева Александра (5395)
 {
 	M.n = M.n + k; //увеличила степень
 	M.C.resize(M.n + 1); //Выделяем память
@@ -475,33 +489,40 @@ Polynomial MUL_Pxk_P(Polynomial M, int k) //умножает многочлен 
 	return M;
 }
 
-Ratio LED_P_Z(Polynomial B) //возвращает старший коэффициент многочлена
+Ratio LED_P_Z(Polynomial B) //возвращает старший коэффициент многочлена, выполнил Савчук Максим (5395)
 {
 	return B.C[B.n];
 }
 
-int DEG_P_N(Polynomial B) // возвращает степень многочлена
+int DEG_P_N(Polynomial B) // возвращает степень многочлена,  выполнил Савчук Максим (5395)
 {
 	return B.n;
 }
 
-Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает частное от деления divident на denominator
+Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает частное от деления divident на denominator, выполнил Квятковский Антон (5395)
 {
 	int k(0);
+	Ratio null;
+	null = zeroRat(null);
 	Polynomial quotient; // Частное
 	quotient.n = dividend.n - denominator.n; //Степень частного
 	quotient.C.resize(quotient.n + 1);
+	for (int i(0); i <= quotient.n; i++)
+	{
+		quotient.C[i] = null;
+	}
 	Polynomial temp;
 	Polynomial tempPol;
-	while (dividend.n >= denominator.n);
+	while (dividend.n >= denominator.n)
 	{
 		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
-		for (int i(quotient.n-k); i >= 0; i--)
-		{
+		tempPol.C.resize(quotient.n + 1-k);
+		tempPol.n = quotient.n - k;
+		for (int i(tempPol.n); i >= 0; i--)
 			tempPol.C[i] = quotient.C[i];
-		}
 		temp = MUL_PP_P(denominator, tempPol);
-		dividend = (SUB_PP_P(dividend, temp));
+		dividend = SUB_PP_P(dividend, temp);
+		k++;
 
 	}
 
@@ -511,23 +532,30 @@ Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator) // возвра
 
 }
 
-Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает остаток от деления divident на denominator
+Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает остаток от деления divident на denominator, выполнил Квятковский Антон (5395)
 {
 	int k(0);
+	Ratio null;
+	null = zeroRat(null);
 	Polynomial quotient; // Частное
 	quotient.n = dividend.n - denominator.n; //Степень частного
 	quotient.C.resize(quotient.n + 1);
+	for (int i(0); i <= quotient.n; i++)
+	{
+		quotient.C[i] = null;
+	}
 	Polynomial temp;
 	Polynomial tempPol;
-	while (dividend.n >= denominator.n);
+	while (dividend.n >= denominator.n)
 	{
 		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
-		for (int i(quotient.n - k); i >= 0; i--)
-		{
+		tempPol.C.resize(quotient.n + 1 - k);
+		tempPol.n = quotient.n - k;
+		for (int i(tempPol.n); i >= 0; i--)
 			tempPol.C[i] = quotient.C[i];
-		}
 		temp = MUL_PP_P(denominator, tempPol);
-		dividend = (SUB_PP_P(dividend, temp));
+		dividend = SUB_PP_P(dividend, temp);
+		k++;
 
 	}
 
@@ -537,7 +565,7 @@ Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator) // возвра
 
 }
 
-Polynomial DER_P_P(Polynomial B)
+Polynomial DER_P_P(Polynomial B) // Производная, выполнил Большаков Виктор (5395)
 {
 	Integer oneInt;
 	oneInt.A.A.resize(1);
@@ -557,27 +585,20 @@ Polynomial DER_P_P(Polynomial B)
 
 
 
-Polynomial MUL_PP_P(Polynomial first, Polynomial second) //Умножение многочленов
+Polynomial MUL_PP_P(Polynomial first, Polynomial second) //Умножение многочленов, выполнила Гаврильева Александра (5395)
 {
 	Polynomial res;
 	res.n = first.n + second.n;
 	res.C.resize(res.n + 1);
 	Ratio null;
 	null = zeroRat(null);
-	if (first.n > second.n)
-	{
-		second.C.resize(first.C.size());
-		for (int i(second.n + 1); i < second.C.size(); i++)
-			second.C[i] = null;
-	
-	}
-	else
-	{
-		first.C.resize(second.C.size());
-		for (int i(first.n + 1); i < first.C.size(); i++)
-			first.C[i] = null;
-	}
+	first.C.resize(res.n + 1);
+	second.C.resize(res.n + 1);
+	for (int i(first.n + 1); i <= res.n; i++)
+		first.C[i] = null;
 
+	for (int i(second.n + 1); i <= res.n; i++)
+		second.C[i] = null;
 	for (int i(0); i <= res.n; i++)
 		res.C[i] = null;
 	for (int i(0); i <= res.n; i++)
@@ -586,7 +607,7 @@ Polynomial MUL_PP_P(Polynomial first, Polynomial second) //Умножение м
 	return res;
 }
 
-Polynomial ADD_PP_P(Polynomial first, Polynomial second) // складывает многочлены
+Polynomial ADD_PP_P(Polynomial first, Polynomial second) // складывает многочлены , выполнил Бах Артём (5395)
 {
 	Polynomial res;
 	if (first.n >= second.n)
@@ -620,7 +641,7 @@ Polynomial ADD_PP_P(Polynomial first, Polynomial second) // складывает
 	return res;
 }
 
-Polynomial SUB_PP_P(Polynomial first, Polynomial second) // вычитает многочлены
+Polynomial SUB_PP_P(Polynomial first, Polynomial second) // вычитает многочлены, выполнил Бах Артём (5395)
 {
 	Polynomial res;
 	if (first.n >= second.n)
@@ -654,7 +675,7 @@ Polynomial SUB_PP_P(Polynomial first, Polynomial second) // вычитает м�
 	return res;
 }
 
-Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number) //Умножение многочлена на рациональное число
+Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number) //Умножение многочлена на рациональное число, выполнил Павел Укропов (5395)
 {
 	for (unsigned int i = 0; i <= chlen.n; i++)
 	{
@@ -663,7 +684,7 @@ Polynomial MUL_P_Q(Polynomial chlen, Ratio ratio_number) //Умножение м
 	return chlen;
 }
 
-Polynomial FAC_P_PQ(Polynomial P) //Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
+Polynomial FAC_P_PQ(Polynomial P) //Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей, выполнил Тимофей Кузьмин (5395)
 {
 
 	Natural nok = P.C[0].denum;
@@ -683,7 +704,7 @@ Polynomial FAC_P_PQ(Polynomial P) //Вынесение из многочлена
 	return P;
 }
 
-Polynomial GCF_PP_P(Polynomial PA, Polynomial PB) //НОД Многочлена
+Polynomial GCF_PP_P(Polynomial PA, Polynomial PB) //НОД Многочлена,  выполнил Тимофей Кузьмин (5395)
 {
 	if (PA.n < PB.n)
 		return GCF_PP_P(PB, PA);
@@ -699,10 +720,21 @@ Polynomial GCF_PP_P(Polynomial PA, Polynomial PB) //НОД Многочлена
 	return PB;
 }
 
-Polynomial NMR_P_P(Polynomial chlen) //Преобразование многочлена — кратные корни в простые
+Polynomial NMR_P_P(Polynomial chlen) //Преобразование многочлена — кратные корни в простые, выполнил Павел Укропов (5395)
 {
+	Polynomial temp;
+	Polynomial res;
+	Polynomial one;
+	one.C.resize(1);
+	one.C[0] = oneRat(one.C[0]);
+	while (chlen.n != 0)
+	{
+		temp = GCF_PP_P(DIV_PP_P(chlen, GCF_PP_P(DER_P_P(chlen), chlen)), DER_P_P(chlen));
+		one = MUL_PP_P(one, DIV_PP_P(DIV_PP_P(chlen, GCF_PP_P(DER_P_P(chlen), chlen)), temp));
+		chlen = GCF_PP_P(chlen, DER_P_P(chlen));
+	}
+	 return one;
 
-	return DIV_PP_P(chlen, GCF_PP_P(DER_P_P(chlen), chlen));
 	
 }
 
