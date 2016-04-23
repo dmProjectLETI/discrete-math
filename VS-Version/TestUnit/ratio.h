@@ -1,19 +1,16 @@
-#ifndef RATIO_H
-#define RATIO_H
+#pragma once
+#include "Integer.h"
+struct Ratio
+{
+	Integer num;
+	Natural denum;
+};
 
-#include "structs.h"
-#include "natural.h"
-#include "integer.h"
-
-// РњРѕРґСѓР»СЊ РґР»СЏ РґСЂРѕР±РµР№
-Ratio ADD_QQ_Q(Ratio A, Ratio B); // Р¤СѓРЅРєС†РёСЏ СЃР»РѕР¶РµРЅРёСЏ РґРІСѓС… СЂР°С†РёРѕРЅР°Р»СЊРЅС‹С… С‡РёСЃРµР»
-Ratio TRAN_Z_Q(Integer A); // Р¤СѓРЅРєС†РёСЏ, РєРѕС‚РѕСЂР°СЏ РїСЂРµРѕР±СЂР°Р·СѓРµС‚ С†РµР»РѕРµ РІ РґСЂРѕР±РЅРѕРµ(СЃРѕ Р·РЅР°РјРµРЅР°С‚РµР»РµРј = 1)
-Ratio RED_Q_Q(Ratio A); // Р¤СѓРЅРєС†РёСЏ СЃРѕРєСЂР°С‰РµРЅРёСЏ РґСЂРѕР±Рё
-Integer TRAN_Q_Z(Ratio b); // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РґСЂРѕР±РЅРѕРіРѕ РІ С†РµР»РѕРµ
-bool INT_Q_Z(Ratio R); // Р•СЃР»Рё СЂР°С†РёРѕРЅР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ - С†РµР»РѕРµ, С‚Рѕ 1, РёРЅР°С‡Рµ 0
-Ratio MUL_QQ_Q (Ratio A, Ratio B); //СѓРјРЅРѕР¶РµРЅРёРµ РґСЂРѕР±РЅС‹С… С‡РёСЃРµР»
-Ratio DIV_QQ_Q (Ratio A, Ratio B); //РґРµР»РµРЅРёРµ РґСЂРѕР±РЅС‹С… С‡РёСЃРµР»
-Ratio SUB_QQ_Q(Ratio A, Ratio B); //Р’С‹С‡РёС‚Р°РЅРёРµ РґСЂРѕР±РµР№
-// РљРѕРЅРµС† РјРѕРґСѓР»СЏ РґР»СЏ РґСЂРѕР±РµР№
-
-#endif // RATIO_H
+Ratio RED_Q_Q(Ratio A); // Функция сокращения дроби
+bool INT_Q_Z(Ratio R); // Если рациональное число - целое, то 1, иначе 0
+Ratio TRAN_Z_Q(Integer A); // Функция, которая преобразует целое в дробное(со знаменателем = 1)
+Integer TRAN_Q_Z(Ratio b); // Преобразование дробного в целое
+Ratio ADD_QQ_Q(Ratio A, Ratio B); // Функция сложения двух рациональных чисел
+Ratio SUB_QQ_Q(Ratio A, Ratio B); //Вычитание дробей
+Ratio MUL_QQ_Q(Ratio A, Ratio B); //умножение дробных чисел
+Ratio DIV_QQ_Q(Ratio A, Ratio B); //деление дробных чисел

@@ -1,240 +1,241 @@
-#include "natural.h"
+#include "Natural.h"
+#include <iostream>
 
-bool COM_NN_D(Natural First, Natural Second)//Г‘Г°Г ГўГ­ГЁГўГ ГҐГІ Г¤ГўГ  Г·ГЁГ±Г«Г . Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ 1,
-{											// ГҐГ±Г«ГЁ ГЇГҐГ°ГўГ®ГҐ ГЎГ®Г«ГјГёГҐ ГЁГ«ГЁ Г°Г ГўГ­Г® ГўГІГ®Г°Г®Г¬Гі. 0 - ГҐГ±Г«ГЁ Г¬ГҐГ­ГјГёГҐ.
-    if (First.A.size() < Second.A.size())
-        return 0;
-    else
-    {
-        if (First.A.size() > Second.A.size())
-            return 1;
-        int i = First.A.size() - 1, k = 1;
-        do
-        {
-            if (First.A[i] > Second.A[i])
-            {
-                return 1;
-            }
-            else
-            {
-                if (First.A[i] < Second.A[i])
-                {
-                    return 0;
-                }
-                else
-                    if (i == 0)
-                        return 1;
-                    else
-                        --i;
-            }
-        } while (k);
-    }
+bool COM_NN_D(Natural First, Natural Second)//Сравнивает два числа. Возвращает 1, 
+{											// если первое больше или равно второму. 0 - если меньше.(Алексеева Анастасия 5372)
+	if (First.A.size() < Second.A.size())
+		return 0;
+	else
+	{
+		if (First.A.size() > Second.A.size())
+			return 1;
+		int i = First.A.size() - 1, k = 1;
+		do
+		{
+			if (First.A[i] > Second.A[i])
+			{
+				return 1;
+			}
+			else
+			{
+				if (First.A[i] < Second.A[i])
+				{
+					return 0;
+				}
+				else
+					if (i == 0)
+						return 1;
+					else
+						--i;
+			}
+		} while (k);
+	}
 }
 
-bool NZER_N_B(Natural chislo) //ГЏГ°Г®ГўГҐГ°ГїГҐГІ Г·ГЁГ±Г«Г® Г­Г  Г­ГҐ Г°Г ГўГҐГ­Г±ГІГўГ® Г­ГіГ«Гѕ
-{							  //1- Г·ГЁГ±Г«Г® ГЇГ®Г«Г®Г¦ГЁГІГҐГ«ГјГ­Г®ГҐ, 0 - Г·ГЁГ±Г«Г® Г°Г ГўГ­Г® 0
-    if (chislo.A.empty())
-        return 0;
-    else
-    {
-        int sum = 0;
-        for (int i = 0; i < chislo.A.size(); ++i)
-            sum = sum + chislo.A[i];
-        if (sum)
-            return 1;
-        else
-            return 0;
-    }
+bool NZER_N_B(Natural chislo) //Проверяет число на не равенство нулю
+{							  //1- число положительное, 0 - число равно 0 (Чачух Роман 5372)
+	if (chislo.A.empty())
+		return 0;
+	else
+	{
+		int sum = 0;
+		for (int i = 0; i < chislo.A.size(); ++i)
+			sum = sum + chislo.A[i];
+		if (sum)
+			return 1;
+		else
+			return 0;
+	}
 }
 
-Natural ADD_1N_N(Natural chislo) //ГЏГ°ГЁГЎГ ГўГ«ГїГҐГІ 1 ГЄ Г·ГЁГ±Г«Гі
+Natural ADD_1N_N(Natural chislo) //Прибавляет 1 к числу (Синельникова Яна 5372)
 {
-    int k = 1, i = 0;
-    do
-    {
-        if (chislo.A[i] == 9)
-        {
-            chislo.A[i] = 0;
-            ++i;
-            if (i == chislo.A.size())
-            {
-                chislo.A.push_back(1);
-                k = 0;
-            }
-        }
-        else
-        {
-            chislo.A[i] = ++chislo.A[i];
-            k = 0;
-        }
-    } while (k);
-    return chislo;
+	int k = 1, i = 0;
+	do
+	{
+		if (chislo.A[i] == 9)
+		{
+			chislo.A[i] = 0;
+			++i;
+			if (i == chislo.A.size())
+			{
+				chislo.A.push_back(1);
+				k = 0;
+			}
+		}
+		else
+		{
+			chislo.A[i] = ++chislo.A[i];
+			k = 0;
+		}
+	} while (k);
+	return chislo;
 }
 
-Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Г‘ГЄГ«Г Г¤Г»ГўГ ГҐГІ Г¤ГўГ  Г·ГЁГ±Г«Г 
+Natural ADD_NN_N(Natural chislo1, Natural chislo2)//Складывает два числа (Потапова Юлия 5372)
 {
-    if (!COM_NN_D(chislo1, chislo2))
-        chislo1.A.swap(chislo2.A);
-    int s = 0;
-    Natural Sum;
-    for (int i = 0; i < chislo2.A.size(); ++i)
-    {
-        Sum.A.push_back((chislo1.A[i] + chislo2.A[i] + s) % (10));
-        s = (chislo1.A[i] + chislo2.A[i] + s) / (10);
-    }
-    if (chislo1.A.size() != chislo2.A.size())
-        for (int i = chislo2.A.size(); i < chislo1.A.size(); ++i)
-        {
-            Sum.A.push_back((chislo1.A[i] + s) % (10));
-            s = (chislo1.A[i] + s) / (10);
-        }
-    if (s > 0)
-    {
-        Sum.A.push_back(s);
-    }
-    return Sum;
+	if (!COM_NN_D(chislo1, chislo2))
+		chislo1.A.swap(chislo2.A);
+	int s = 0;
+	Natural Sum;
+	for (int i = 0; i < chislo2.A.size(); ++i)
+	{
+		Sum.A.push_back((chislo1.A[i] + chislo2.A[i] + s) % (10));
+		s = (chislo1.A[i] + chislo2.A[i] + s) / (10);
+	}
+	if (chislo1.A.size() != chislo2.A.size())
+		for (int i = chislo2.A.size(); i < chislo1.A.size(); ++i)
+		{
+			Sum.A.push_back((chislo1.A[i] + s) % (10));
+			s = (chislo1.A[i] + s) / (10);
+		}
+	if (s > 0)
+	{
+		Sum.A.push_back(s);
+	}
+	return Sum;
 };
 
-Natural SUB_NN_N(Natural First, Natural Second) //Г‚Г»Г·ГЁГІГ ГҐГІ ГЁГ§ Г®Г¤Г­Г®ГЈГ® Г·ГЁГ±Г«Г  Г¤Г°ГіГЈГ®ГҐ. ГђГ ГЎГ®ГІГ ГҐГІ ГІГ®Г«ГјГЄГ®
-{												//Г¤Г«Гї Г­ГҐГ®ГІГ°ГЁГ¶Г ГІГҐГ«ГјГ­Г»Гµ Г°ГҐГ§ГіГ«ГјГІГ ГІГ®Гў, ГЇГ®ГЅГІГ®Г¬Гі ГЇГҐГ°ГҐГ¤ ГўГ»Г§Г®ГўГ®Г¬ ГЅГІГ®Г© ГґГіГ­ГЄГ¶ГЁГЁ
-    int p = 0;									//Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГіГЎГҐГ¤ГЁГІГјГ±Гї, Г·ГІГ® ГЇГҐГ°ГўГ®ГҐ Г·ГЁГ±Г«Г® Г­ГҐ Г¬ГҐГ­ГјГёГҐ ГўГІГ®Г°Г®ГЈГ®
-    for (int i = 0; i < Second.A.size(); ++i)
-    {
-        if (First.A[i] + 10 - Second.A[i] - p < 10)
-        {
-            First.A[i] = First.A[i] + 10 - Second.A[i] - p;
-            p = 1;
-        }
-        else
-        {
-            First.A[i] = First.A[i] - Second.A[i] - p;
-            p = 0;
-        }
-    }
-    for (int i = Second.A.size(); i < First.A.size(); ++i)
-    {
-        if (First.A[i] + 10 - p < 10)
-        {
-            First.A[i] = First.A[i] + 10 - p;
-            p = 1;
-        }
-        else
-        {
-            First.A[i] = First.A[i] - p;
-            p = 0;
-        }
-    }
-    int k = 0;
-    int i = First.A.size() - 1;
-    for (i; i > 0; --i)
-    {
-        if (First.A[i])
-            k = 1;
-        if (!First.A[i] && !k)
-            First.A.pop_back();
-    }
-    return First;
+Natural SUB_NN_N(Natural First, Natural Second) //Вычитает из одного числа другое. Работает только
+{												//для неотрицательных результатов, поэтому перед вызовом этой функции 
+	int p = 0;									//необходимо убедиться, что первое число не меньше второго (Кузина Дарья 5372)
+	for (int i = 0; i < Second.A.size(); ++i)
+	{
+		if (First.A[i] + 10 - Second.A[i] - p < 10)
+		{
+			First.A[i] = First.A[i] + 10 - Second.A[i] - p;
+			p = 1;
+		}
+		else
+		{
+			First.A[i] = First.A[i] - Second.A[i] - p;
+			p = 0;
+		}
+	}
+	for (int i = Second.A.size(); i < First.A.size(); ++i)
+	{
+		if (First.A[i] + 10 - p < 10)
+		{
+			First.A[i] = First.A[i] + 10 - p;
+			p = 1;
+		}
+		else
+		{
+			First.A[i] = First.A[i] - p;
+			p = 0;
+		}
+	}
+	int k = 0;
+	int i = First.A.size() - 1;
+	for (i; i > 0; --i)
+	{
+		if (First.A[i])
+			k = 1;
+		if (!First.A[i] && !k)
+			First.A.pop_back();
+	}
+	return First;
 }
 
-Natural MUL_ND_N(Natural ch, int cifra) //Г“Г¬Г­Г®Г¦Г ГҐГІ Г·ГЁГ±Г«Г® Г­Г  Г¶ГЁГґГ°Гі
+Natural MUL_ND_N(Natural ch, int cifra) //Умножает число на цифру (Васильева Ольга 5372)
 {
-    int s = 0;
-    Natural chislo;
-    for (int i = 0; i < ch.A.size(); ++i)
-    {
-        chislo.A.push_back((ch.A[i] * cifra + s) % 10);
-        s = (ch.A[i] * cifra + s) / 10;
-    }
+	int s = 0;
+	Natural chislo;
+	for (int i = 0; i < ch.A.size(); ++i)
+	{
+		chislo.A.push_back((ch.A[i] * cifra + s) % 10);
+		s = (ch.A[i] * cifra + s) / 10;
+	}
 
-    if (s > 0)
-    {
-        chislo.A.push_back(s);
-    }
-    return chislo;
+	if (s > 0)
+	{
+		chislo.A.push_back(s);
+	}
+	return chislo;
 }
 
-Natural MUL_Nk_N(Natural Input, int k) //Г“Г¬Г­Г®Г¦Г ГҐГІ Г·ГЁГ±Г«Г® Г­Г  10^k
+Natural MUL_Nk_N(Natural &Input, int k) //Умножает число на 10^k (Макаров Семен 5372)
 {
-    for (int i = 0; i < k; ++i)
-        Input.A.insert(Input.A.begin(), 0);
-    return Input;
+	for (int i = 0; i < k; ++i)
+		Input.A.insert(Input.A.begin(), 0);
+	return Input;
 }
 
-Natural MUL_NN_N(Natural chislo1, Natural chislo2) //ГЏГҐГ°ГҐГ¬Г­Г®Г¦Г ГҐГІ Г¤ГўГ  Г·ГЁГ±Г«Г 
+Natural MUL_NN_N(Natural chislo1, Natural chislo2) //Перемножает два числа (Потапова Юлия 5372)
 {
-    Natural Proizved;
-    for (int i = 0; i < chislo2.A.size(); ++i)
-    {
-        Proizved = ADD_NN_N(MUL_Nk_N(MUL_ND_N(chislo1, chislo2.A[i]), i), Proizved);
-    }
-    return Proizved;
+	Natural Proizved;
+	for (int i = 0; i < chislo2.A.size(); ++i)
+	{
+		Proizved = ADD_NN_N(MUL_Nk_N(MUL_ND_N(chislo1, chislo2.A[i]), i), Proizved);
+	}
+	return Proizved;
 }
 
-Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Г‚Г»Г·ГЁГІГ ГҐГІ ГЁГ§ ГЇГҐГ°ГўГ®ГЈГ® Г·ГЁГ±Г«Г  ГўГІГ®Г°Г®ГҐ, ГіГ¬Г­Г®Г¦ГҐГ­Г­Г®ГҐ Г­Г  Г¶ГЁГґГ°Гі
-{															//Г Г­Г Г«Г®ГЈГЁГ·Г­Г® ГўГ»Г·ГЁГІГ Г­ГЁГѕ, ГЇГҐГ°ГҐГ¤ ГўГ»Г§Г®ГўГ®Г¬ Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГіГЎГҐГ¤ГЁГІГјГ±Гї,
-    return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//Г·ГІГ® Г°ГҐГ§ГіГ«ГјГІГ ГІ ГўГ®Г§Г¬Г®Г¦ГҐГ­, ГІ.ГҐ. Г­ГҐГ®ГІГ°ГЁГ¶Г ГІГҐГ«ГҐГ­
+Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c) //Вычитает из первого числа второе, умноженное на цифру
+{															//аналогично вычитанию, перед вызовом необходимо убедиться,
+	return SUB_NN_N(chislo1, MUL_ND_N(chislo2, c));			//что результат возможен, т.е. неотрицателен (Волков Артем 5372)
 }
 
-Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Г‚Г»Г·ГЁГ±Г«ГїГҐГІ ГЇГҐГ°ГўГіГѕ Г¶ГЁГґГ°Гі Г·Г Г±ГІГ­Г®ГЈГ®, ГіГ¬Г­Г®Г¦ГҐГ­Г­ГіГѕ Г­Г  10^k,
-{													//ГЈГ¤ГҐ k - ГЇГ®Г§ГЁГ¶ГЁГї ГЅГІГ®Г© Г¶ГЁГґГ°Г» Гў Г·Г Г±ГІГ­Г®Г¬
-    Natural chislo;
-    int j = (chislo1.A.size() - 1);
-    for (int i = 0; i < chislo2.A.size(); ++i, --j)
-        chislo.A.insert(chislo.A.begin(), chislo1.A[j]);
-    if (!COM_NN_D(chislo, chislo2))
-        chislo.A.insert(chislo.A.begin(), chislo1.A[j]);
+Natural DIV_NN_Dk(Natural chislo1, Natural chislo2)//Вычисляет первую цифру частного, умноженную на 10^k, 
+{													//где k - позиция этой цифры в частном (Моногошева Ирина 5372)
+	Natural chislo;
+	int j = (chislo1.A.size() - 1);
+	for (int i = 0; i < chislo2.A.size(); ++i, --j)
+		chislo.A.insert(chislo.A.begin(), chislo1.A[j]);
+	if (!COM_NN_D(chislo, chislo2))
+		chislo.A.insert(chislo.A.begin(), chislo1.A[j]);
 
-    int i = 10;
-    do
-    {
-        --i;
-    } while (!COM_NN_D(chislo, MUL_ND_N(chislo2, i)));
-    chislo.A.erase(chislo.A.begin(), chislo.A.end());
-    chislo.A.push_back(i);
-    return MUL_Nk_N(chislo, j);
+	int i = 10;
+	do
+	{
+		--i;
+	} while (!COM_NN_D(chislo, MUL_ND_N(chislo2, i)));
+	chislo.A.erase(chislo.A.begin(), chislo.A.end());
+	chislo.A.push_back(i);
+	return MUL_Nk_N(chislo, j);
 }
 
-Natural DIV_NN_N(Natural delimoe, Natural delitel) //ГЌГ ГµГ®Г¤ГЁГІ Г­ГҐГЇГ®Г«Г­Г®ГҐ Г·Г Г±ГІГ­Г®ГҐ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«
+Natural DIV_NN_N(Natural delimoe, Natural delitel) //Находит неполное частное двух чисел (Козак Мария 5372)
 {
-    Natural chastnoe;
-    if (!COM_NN_D(delimoe, delitel))
-    {
-        chastnoe.A.push_back(0);
-        return chastnoe;
-    }
-    else
-    {
-        do
-        {
-            chastnoe = ADD_NN_N(chastnoe, DIV_NN_Dk(delimoe, delitel));
-            delimoe = SUB_NN_N(delimoe, MUL_NN_N(delitel, DIV_NN_Dk(delimoe, delitel)));
-        } while (COM_NN_D(delimoe, delitel));
-        return chastnoe;
-    }
+	Natural chastnoe;
+	if (!COM_NN_D(delimoe, delitel))
+	{
+		chastnoe.A.push_back(0);
+		return chastnoe;
+	}
+	else
+	{
+		do
+		{
+			chastnoe = ADD_NN_N(chastnoe, DIV_NN_Dk(delimoe, delitel));
+			delimoe = SUB_NN_N(delimoe, MUL_NN_N(delitel, DIV_NN_Dk(delimoe, delitel)));
+		} while (COM_NN_D(delimoe, delitel));
+		return chastnoe;
+	}
 }
 
-Natural MOD_NN_N(Natural chislo1, Natural chislo2)//ГЌГ ГµГ®Г¤ГЁГІ Г®Г±ГІГ ГІГ®ГЄ Г®ГІ Г¤ГҐГ«ГҐГ­ГЁГї ГЇГҐГ°ГўГ®ГЈГ® Г·ГЁГ±Г«Г  Г­Г  ГўГІГ®Г°Г®ГҐ
+Natural MOD_NN_N(Natural chislo1, Natural chislo2)//Находит остаток от деления первого числа на второе (Лисицын Захар 5372)
 {
-    return SUB_NN_N(chislo1, MUL_NN_N(DIV_NN_N(chislo1, chislo2), chislo2));
+	return SUB_NN_N(chislo1, MUL_NN_N(DIV_NN_N(chislo1, chislo2), chislo2));
 }
 
-Natural GCF_NN_N(Natural chislo1, Natural chislo2)//ГЌГ ГµГ®Г¤ГЁГІ ГЌГЋГ„ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«
+Natural GCF_NN_N(Natural chislo1, Natural chislo2)//Находит НОД двух чисел (Кузина Дарья 5372)
 {
-    if (!COM_NN_D(chislo1, chislo2))
-        chislo1.A.swap(chislo2.A);
-    Natural n;
-    n.A.push_back(0);
-    while (!(MOD_NN_N(chislo1, chislo2).A == n.A))
-    {
-        chislo1 = MOD_NN_N(chislo1, chislo2);
-        chislo1.A.swap(chislo2.A);
-        if ((chislo2.A.size() == 1) && (chislo2.A[0] == 0))
-            return chislo1;
-    }
-    return chislo2;
+	if (!COM_NN_D(chislo1, chislo2))
+		chislo1.A.swap(chislo2.A);
+	Natural n;
+	n.A.push_back(0);
+	while (!(MOD_NN_N(chislo1, chislo2).A == n.A))
+	{
+		chislo1 = MOD_NN_N(chislo1, chislo2);
+		chislo1.A.swap(chislo2.A);
+		if ((chislo2.A.size() == 1) && (chislo2.A[0] == 0))
+			return chislo1;
+	}
+	return chislo2;
 }
 
-Natural LCM_NN_N(Natural chislo1, Natural chislo2)//ГЌГ ГµГ®Г¤ГЁГІ ГЌГЋГЉ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«
+Natural LCM_NN_N(Natural chislo1, Natural chislo2)//Находит НОК двух чисел (Кузина Дарья 5372)
 {
-    return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
+	return DIV_NN_N(MUL_NN_N(chislo1, chislo2), GCF_NN_N(chislo1, chislo2));
 }

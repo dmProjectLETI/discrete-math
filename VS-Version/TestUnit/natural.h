@@ -1,28 +1,29 @@
-#ifndef NATURAL_H
-#define NATURAL_H
+#pragma once
+#include <vector>
+using namespace std;
+struct Natural
+{
+	vector<unsigned int> A;
+};
 
-#include "structs.h"
-
-bool COM_NN_D(Natural First, Natural Second);//РЎСЂР°РІРЅРёРІР°РµС‚ РґРІР° С‡РёСЃР»Р°. Р’РѕР·РІСЂР°С‰Р°РµС‚ 1,
-                                            // РµСЃР»Рё РїРµСЂРІРѕРµ Р±РѕР»СЊС€Рµ РёР»Рё СЂР°РІРЅРѕ РІС‚РѕСЂРѕРјСѓ. 0 - РµСЃР»Рё РјРµРЅСЊС€Рµ.
-bool NZER_N_B(Natural chislo); //РџСЂРѕРІРµСЂСЏРµС‚ С‡РёСЃР»Рѕ РЅР° РЅРµ СЂР°РІРµРЅСЃС‚РІРѕ РЅСѓР»СЋ
-                              //1- С‡РёСЃР»Рѕ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ, 0 - С‡РёСЃР»Рѕ СЂР°РІРЅРѕ 0
-Natural ADD_1N_N(Natural chislo); //РџСЂРёР±Р°РІР»СЏРµС‚ 1 Рє С‡РёСЃР»Сѓ
-Natural ADD_NN_N(Natural chislo1, Natural chislo2);//РЎРєР»Р°РґС‹РІР°РµС‚ РґРІР° С‡РёСЃР»Р°
-Natural SUB_NN_N(Natural First, Natural Second); //Р’С‹С‡РёС‚Р°РµС‚ РёР· РѕРґРЅРѕРіРѕ С‡РёСЃР»Р° РґСЂСѓРіРѕРµ. Р Р°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ
-                                                //РґР»СЏ РЅРµРѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹С… СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ, РїРѕСЌС‚РѕРјСѓ РїРµСЂРµРґ РІС‹Р·РѕРІРѕРј СЌС‚РѕР№ С„СѓРЅРєС†РёРё
-                                                //РЅРµРѕР±С…РѕРґРёРјРѕ СѓР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ РЅРµ РјРµРЅСЊС€Рµ РІС‚РѕСЂРѕРіРѕ
-Natural MUL_ND_N(Natural ch, int cifra); //РЈРјРЅРѕР¶Р°РµС‚ С‡РёСЃР»Рѕ РЅР° С†РёС„СЂСѓ
-Natural MUL_Nk_N(Natural Input, int k); //РЈРјРЅРѕР¶Р°РµС‚ С‡РёСЃР»Рѕ РЅР° 10^k
-Natural MUL_NN_N(Natural chislo1, Natural chislo2); //РџРµСЂРµРјРЅРѕР¶Р°РµС‚ РґРІР° С‡РёСЃР»Р°
-Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c); //Р’С‹С‡РёС‚Р°РµС‚ РёР· РїРµСЂРІРѕРіРѕ С‡РёСЃР»Р° РІС‚РѕСЂРѕРµ, СѓРјРЅРѕР¶РµРЅРЅРѕРµ РЅР° С†РёС„СЂСѓ
-                                                            //Р°РЅР°Р»РѕРіРёС‡РЅРѕ РІС‹С‡РёС‚Р°РЅРёСЋ, РїРµСЂРµРґ РІС‹Р·РѕРІРѕРј РЅРµРѕР±С…РѕРґРёРјРѕ СѓР±РµРґРёС‚СЊСЃСЏ,
-                                                            //С‡С‚Рѕ СЂРµР·СѓР»СЊС‚Р°С‚ РІРѕР·РјРѕР¶РµРЅ, С‚.Рµ. РЅРµРѕС‚СЂРёС†Р°С‚РµР»РµРЅ
-Natural DIV_NN_Dk(Natural chislo1, Natural chislo2);//Р’С‹С‡РёСЃР»СЏРµС‚ РїРµСЂРІСѓСЋ С†РёС„СЂСѓ С‡Р°СЃС‚РЅРѕРіРѕ, СѓРјРЅРѕР¶РµРЅРЅСѓСЋ РЅР° 10^k,
-                                                    //РіРґРµ k - РїРѕР·РёС†РёСЏ СЌС‚РѕР№ С†РёС„СЂС‹ РІ С‡Р°СЃС‚РЅРѕРј
-Natural DIV_NN_N(Natural delimoe, Natural delitel); //РќР°С…РѕРґРёС‚ РЅРµРїРѕР»РЅРѕРµ С‡Р°СЃС‚РЅРѕРµ РґРІСѓС… С‡РёСЃРµР»
-Natural MOD_NN_N(Natural chislo1, Natural chislo2);//РќР°С…РѕРґРёС‚ РѕСЃС‚Р°С‚РѕРє РѕС‚ РґРµР»РµРЅРёСЏ РїРµСЂРІРѕРіРѕ С‡РёСЃР»Р° РЅР° РІС‚РѕСЂРѕРµ
-Natural GCF_NN_N(Natural chislo1, Natural chislo2);//РќР°С…РѕРґРёС‚ РќРћР” РґРІСѓС… С‡РёСЃРµР»
-Natural LCM_NN_N(Natural chislo1, Natural chislo2);//РќР°С…РѕРґРёС‚ РќРћРљ РґРІСѓС… С‡РёСЃРµР»
-
-#endif // NATURAL_H
+bool COM_NN_D(Natural First, Natural Second);//Сравнивает два числа. Возвращает 1,
+											 // если первое больше или равно второму. 0 - если меньше.
+bool NZER_N_B(Natural chislo); //Проверяет число на не равенство нулю
+							   //1- число положительное, 0 - число равно 0
+Natural ADD_1N_N(Natural chislo); //Прибавляет 1 к числу
+Natural ADD_NN_N(Natural chislo1, Natural chislo2);//Складывает два числа
+Natural SUB_NN_N(Natural First, Natural Second); //Вычитает из одного числа другое. Работает только
+												 //для неотрицательных результатов, поэтому перед вызовом этой функции
+												 //необходимо убедиться, что первое число не меньше второго
+Natural MUL_ND_N(Natural ch, int cifra); //Умножает число на цифру
+Natural MUL_Nk_N(Natural &Input, int k); //Умножает число на 10^k
+Natural MUL_NN_N(Natural chislo1, Natural chislo2); //Перемножает два числа
+Natural SUB_NDN_N(Natural chislo1, Natural chislo2, int c); //Вычитает из первого числа второе, умноженное на цифру
+															//аналогично вычитанию, перед вызовом необходимо убедиться,
+															//что результат возможен, т.е. неотрицателен
+Natural DIV_NN_Dk(Natural chislo1, Natural chislo2);//Вычисляет первую цифру частного, умноженную на 10^k,
+													//где k - позиция этой цифры в частном
+Natural DIV_NN_N(Natural delimoe, Natural delitel); //Находит неполное частное двух чисел
+Natural MOD_NN_N(Natural chislo1, Natural chislo2);//Находит остаток от деления первого числа на второе
+Natural GCF_NN_N(Natural chislo1, Natural chislo2);//Находит НОД двух чисел
+Natural LCM_NN_N(Natural chislo1, Natural chislo2);//Находит НОК двух чисел
