@@ -338,14 +338,13 @@ Integer SUB_ZZ_Z(Integer first, Integer second) //Вычитание двух ц
 
 Integer MUL_ZZ_Z(Integer first, Integer second) //Умножение двух целых чисел.
 {						//Выполнил Предтеченский Дмитрий (5396).
-	Integer mul;
-	mul.pos = 1;
-	mul.A = MUL_NN_N(first.A, second.A);
-
-	if (POZ_Z_D(first) == -1)
-		MUL_Z_NEGZ(mul);
-	if (POZ_Z_D(second) == -1)
-		MUL_Z_NEGZ(mul);
+	Integer mul; 
+	mul.A = MUL_NN_N(first.A, second.A); 
+	
+	if (((first.pos == 0) && (second.pos == 0)) || ((first.pos == 1) && (second.pos == 1))) 
+		mul.pos = 1; 
+	else 
+		mul.pos = 0; 
 
 	return mul;
 }
