@@ -10,8 +10,8 @@ struct Integer
 	Natural A;
 };
 
-int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
-{
+int POZ_Z_D(Integer num) //Сигнатура, определение знака целого числа.	
+{			 //Выполнил Предтеченский Дмитрий (5396).
 	if (!num.pos)
 		return -1;
 	else if (NZER_N_B(num.A))
@@ -19,117 +19,120 @@ int POZ_Z_D(Integer num) //Ïîêàçàòåëü çíàêà, ñèãíàòóðà.
 	return 0;
 }
 
-Natural ABS_Z_N(Integer num) //Ìîäóëü.
-{
+Integer TRANS_N_Z(Natural num) //Преобразование натурального числа в целое число.
+{			       //Выполнил Предтеченский Дмитрий (5396).	
+	Integer newNum;
+	newNum.A = num;
+	return newNum;
+}
+
+Natural TRANS_Z_N(Integer num) //Преобразование целого положительного числа в натуральное число.
+{			       //Выполнил Предтеченский Дмитрий (5396).	
 	return num.A;
 }
 
-Integer MUL_Z_NEGZ(Integer num) //Óìíîæåíèå íà -1.
-{
+Natural ABS_Z_N(Integer num) //Модуль целого числа.
+{			     //Выполнил Предтеченский Дмитрий (5396).
+	return num.A;
+}
+
+Integer MUL_Z_NEGZ(Integer num) //Умножение целого числа на -1
+{				//Выполнил Предтеченский Дмитрий (5396).
 	num.pos = !num.pos;
 	return num;
 }
 
-Integer ADD_ZZ_Z(Integer first, Integer second) //Ñëîæåíèå äâóõ öåëûõ.
-{
+Integer ADD_ZZ_Z(Integer first, Integer second) //Сложение двух целых чисел.
+{						//Выполнили Предтеченский Дмитрий (5396) и Квятковский Антон (5395).
 	Integer sum;
-	if (POZ_Z_D(first) <= 0)
-		if (POZ_Z_D(second) <= 0) {
-			sum.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-			sum = MUL_Z_NEGZ(sum);
+
+	if (((first.pos == 1) && (second.pos == 1)) || ((first.pos == 0) && (second.pos == 0)))
+	{
+		sum.A = ADD_NN_N(first.A, second.A);
+		if (first.pos == 0 || (second.pos == 0))
+			MUL_Z_NEGZ(sum);
+	}
+	else
+	{
+		if (COM_NN_D(first.A, second.A))
+		{
+			sum.A = SUB_NN_N(first.A, second.A);
+			if (first.pos == 0)
+				MUL_Z_NEGZ(sum);
 		}
-		else {
-			if (first.A > second.A) {
-				sum = MUL_Z_NEGZ(sum);
-			} 
-			sum.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+		else
+		{
+			sum.A = SUB_NN_N(second.A, first.A);
+			if (second.pos == 0)
+				MUL_Z_NEGZ(sum);
 		}
-	else 
-		if (POZ_Z_D(second) >= 0)
-			sum.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-		else {
-			if (second.A > first.A) {
-				sum = MUL_Z_NEGZ(sum);
-			}
-			sum.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
-		}
+	}
 	return sum;
 }
 
-Integer SUB_ZZ_Z(Integer first, Integer second) //Âû÷èòàíèå äâóõ öåëûõ.
-{
+Integer SUB_ZZ_Z(Integer first, Integer second) //Вычитание двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий (5396).
 	Integer sub;
-	sub.pos = 1;
-	if (POZ_Z_D(first) <= 0) 
-		if (POZ_Z_D(second) <= 0) {
-			if (first.A > second.A) {
-				sum = MUL_Z_NEGZ(sum);
+
+	if (POZ_Z_D(first) <= 0)
+		if (POZ_Z_D(second) <= 0)
+			if (COM_NN_D(first.A, second.A))
+			{
+				sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+				sub = MUL_Z_NEGZ(sub);
 			}
-			sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
-		} else {
-			sub.A = ADD_ZZ_Z(first, second);
-			sum = MUL_Z_NEGZ(sum);
+			else
+				sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+		else {
+			sub.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+			sub = MUL_Z_NEGZ(sub);
 		}
 	else {
 		if (POZ_Z_D(second) >= 0) {
-			if (second.A > first.A) {
-				sum = MUL_Z_NEGZ(sum);
+			if (!COM_NN_D(first.A, second.A)) {
+				sub.A = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+				sub = MUL_Z_NEGZ(sub);
 			}
-			sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+			else
+				sub.A = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
 		}
-		else 
-			sub.A = ADD_ZZ_Z(first, second);
+		else
+			sub.A = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
 	}
 	return sub;
 }
 
-Natural MOD_ZZ_Z(Integer first, Integer second)
-{
-	Natural result;
-	if (NZER_N_B(second.A)) //If divisor is not equal to 0
-	{
-		result.A = MOD_NN_N(first.A, second.A);
-		if ((POZ_Z_D(first) < 0)) //If dividend is negative
-			result.A = SUB_ZZ_Z(second.A, result.A); // If a < 0 then a mod b = |a|- (|a| mod |b|)
-		return result;
-        } 
-	else //If divisor is equal to 0
-		throw invalid_argument("Divided by 0");
+Integer MUL_ZZ_Z(Integer first, Integer second) //Умножение двух целых чисел.
+{						//Выполнил Предтеченский Дмитрий (5396).
+	Integer mul; 
+	mul.A = MUL_NN_N(first.A, second.A); 
+	
+	if (((first.pos == 0) && (second.pos == 0)) || ((first.pos == 1) && (second.pos == 1))) 
+		mul.pos = 1; 
+	else 
+		mul.pos = 0; 
+
+	return mul;
+}
+
+Integer MOD_ZZ_Z(Integer first, Natural second) //Остаток от деления целого числа на целое число. 
+{						//Выполнила Чаркова Дарья (5396).
+	Integer result;
+
+	result.A = MOD_NN_N(first.A, second);
+
+	return result;
 };
 
-void DIV_NN_N(Natural first,Natural second) //Частное от деления большего натурального числа на меньшее 
-											//или равное натуральное с остатком (делитель отличен от нуля)
-{
-	Natural quotient=0; // частное
-	if (first > second && second != 0) // если первое число больше второго и делитель не равен 0
-	{
-		while(first >= second) // пока делимое >= делителя вычитаем их друг из друга и считаем частное 
-		{
-			first -= second;
-			quotient++;
-		}
-		cout << quotient << endl; // выводим частное
-	}
-	else
-	{
-		if(first < second && first != 0) // если второе число больше первого и делитель не равен 0
-		{
-			while(b >= first) // пока делимое >= делителя вычитаем их друг из друга и считаем частное 
-			{
-				second -= first;
-				quotient++;
-			}
-			cout << quotient << endl; // выводим частное
-		}
-		else 
-		{
-			if(first = second && first != 0) // если первое число равно второму и они не нули, то частное равно 1
-			{
-				quotient = 1;
-				cout << quotient << endl; // выводим частное
-			}
-			else
-				cout << "Error" << endl; // делитель =0 или два числа равны 0
-		}
-	}
+Integer DIV_ZZ_Z(Integer first, Natural second) //Частное от деления большего целого числа на меньшее 
+						//или равное натуральное число с остатком (делитель отличен от нуля).
+{						//Выполнил Уразаев Евгений (5396).
+	Integer div;
+
+	div.A = DIV_NN_N(first.A, second);
+
+	if (POZ_Z_D(first) < 0)
+		div.pos = 0;
+
+	return div;
 }
