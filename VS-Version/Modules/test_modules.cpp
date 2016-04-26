@@ -380,8 +380,8 @@ Ratio ADD_QQ_Q(Ratio A, Ratio B)// Сложение дробей (Калинин
 {
 	Ratio C;
 	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
-	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
-	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));//Вычисление числителя
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));//Вычисление знаменателя
 	C.num = ADD_ZZ_Z(A.num, B.num);
 	C.denum = temp;
 	return C;
@@ -418,8 +418,8 @@ Ratio SUB_QQ_Q(Ratio A, Ratio B) //Вычитание дробей (Выполн
 {
 	Ratio C;
 	Natural temp = LCM_NN_N(A.denum, B.denum); // Поиск НОК
-	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));
-	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));
+	A.num.A = MUL_NN_N(A.num.A, DIV_NN_N(temp, A.denum));//Вычисление числителя
+	B.num.A = MUL_NN_N(B.num.A, DIV_NN_N(temp, B.denum));//Вычисление знаменателя
 	C.num = SUB_ZZ_Z(A.num, B.num);
 	C.denum = temp;
 	return C;
@@ -435,15 +435,15 @@ Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби ( Вы�
 	}
 	return A;
 }
-Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел (Выполнила: Лавренов Андрей )
+Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел (Выполнил: Лавренов Андрей )
 {
 	Ratio C;
 	Integer G;
 	G.A = B.denum;
 	G.pos = 0;
-	C.num = MUL_ZZ_Z(A.num, G);
-	C.denum = MUL_NN_N(A.denum, B.num.A);
-	if (B.num.pos == 1)
+	C.num = MUL_ZZ_Z(A.num, G);//Перемножение числителей
+	C.denum = MUL_NN_N(A.denum, B.num.A);//Перемножение знаменателей
+	if (B.num.pos == 1)// Изменение знака дроби
 		if (C.num.pos == 1)
 			C.num.pos = 0;
 		else
