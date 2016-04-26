@@ -58,18 +58,17 @@ Ratio RED_Q_Q(Ratio A) // Функция сокращения дроби ( Вы�
 	}
 	return A;
 }
-Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел (Выполнила: Лавренов Андрей )
+Ratio DIV_QQ_Q(Ratio A, Ratio B) //деление дробных чисел (Выполнил: Лавренов Андрей )
 {
 	Ratio C;
 	Integer G;
 	G.A = B.denum;
 	G.pos = 0;
 	C.num = MUL_ZZ_Z(A.num, G);//Вычисление числителя
-	C.denum = MUL_NN_N(A.denum, B.num.A);
-	if (B.num.pos == 1)
-		if (C.num.pos == 1)
+	C.denum = MUL_NN_N(A.denum, B.num.A);//Вычисление знаменателя
+	if(C.num.pos == 1 && C.num.pos == 1)
 			C.num.pos = 0;
-		else
+	else
 			C.num.pos = 1;
 	return RED_Q_Q(C);
 }
