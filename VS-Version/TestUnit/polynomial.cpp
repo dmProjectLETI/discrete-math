@@ -54,6 +54,12 @@ Polynomial DIV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает ч
 	}
 	Polynomial temp;
 	Polynomial tempPol;
+	if (denominator.n == 0)
+	{
+		for (int i(0); i <= dividend.n; i++)
+			dividend.C[i] = DIV_QQ_Q(dividend.C[i], denominator.C[0]);
+		return dividend;
+	}
 	while (dividend.n >= denominator.n)
 	{
 		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
@@ -81,13 +87,20 @@ Polynomial MOV_PP_P(Polynomial dividend, Polynomial denominator) // возвращает о
 	Polynomial quotient; // Частное
 	quotient.n = dividend.n - denominator.n; //Степень частного
 	quotient.C.resize(quotient.n + 1);
+	if (denominator.n == 0)
+	{
+		quotient.n = 0;
+		quotient.C.resize(1);
+		quotient.C[0] = null;
+		return quotient;
+	}
 	for (int i(0); i <= quotient.n; i++)
 	{
 		quotient.C[i] = null;
 	}
 	Polynomial temp;
 	Polynomial tempPol;
-	while (dividend.n >= denominator.n)
+	while (dividend.n >= denominator.n) 
 	{
 		quotient.C[quotient.n - k] = DIV_QQ_Q(dividend.C[dividend.n], denominator.C[denominator.n]);
 		tempPol.C.resize(quotient.n + 1 - k);
